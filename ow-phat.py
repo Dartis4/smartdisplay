@@ -121,6 +121,16 @@ for a in weather:
 img = Image.new("P", (inky_display.WIDTH, inky_display.HEIGHT))
 draw = ImageDraw.Draw(img)
 
+# Draw the current weather icon over the backdrop
+if weather["icon"] is not None:
+    fpath = os.path.join(PATH, "ow-resources/01n@2x.png".format(icon=weather["icon"]))
+    ico = Image.open(fpath)
+    # print(ico)
+    img.paste(ico, (140, 0), create_mask(ico))
+
+else:
+    draw.text((185, 25), "?", inky_display.BLACK, font=font50)
+
 # Load the FredokaOne font
 font50 = ImageFont.truetype(os.path.join(PATH, "Verdana.ttf"), 60)
 font22 = ImageFont.truetype(os.path.join(PATH, "Verdana.ttf"), 22)
@@ -137,23 +147,13 @@ draw.text((10, 95), date, inky_display.BLACK, font=font22)
 
 # draw.text((72, 58), "{}".format(description), inky_display.BLACK, font=font)
 
-w, h = 185, 10
-shape = [(50, 50), (w, h)]
-draw.rectangle(shape, fill="#000000")
-
-# Draw the current weather icon over the backdrop
-if weather["icon"] is not None:
-    fpath = os.path.join(PATH, "ow-resources/{icon}.png".format(icon=weather["icon"]))
-    ico = Image.open(fpath)
-    # print(ico)
-    img.paste(ico, (185, 10, 235, 60), create_mask(ico))
-
-else:
-    draw.text((185, 25), "?", inky_display.BLACK, font=font50)
+#w, h = 185, 10
+#shape = [(50, 50), (w, h)]
+#draw.rectangle(shape, fill="#000000")
 
 # Flip the image around
-inky_display.h_flip = True
-inky_display.v_flip = True
+#inky_display.h_flip = True
+#inky_display.v_flip = True
 
 # Display the weather data on Inky pHAT
 inky_display.set_image(img)
