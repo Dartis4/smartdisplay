@@ -123,7 +123,7 @@ draw = ImageDraw.Draw(img)
 
 # Draw the current weather icon over the backdrop
 if weather["icon"] is not None:
-    fpath = os.path.join(PATH, "ow-resources/01n@2x.png".format(icon=weather["icon"]))
+    fpath = os.path.join(PATH, "ow-resources/{icon}@2x.png".format(icon=weather["icon"]))
     ico = Image.open(fpath)
     # print(ico)
     img.paste(ico, (140, 0), create_mask(ico))
@@ -132,20 +132,22 @@ else:
     draw.text((185, 25), "?", inky_display.BLACK, font=font50)
 
 # Load the FredokaOne font
-font50 = ImageFont.truetype(os.path.join(PATH, "Verdana.ttf"), 60)
-font22 = ImageFont.truetype(os.path.join(PATH, "Verdana.ttf"), 22)
+font50 = ImageFont.truetype(os.path.join(PATH, "Verdana.ttf"), 50)
+font18 = ImageFont.truetype(os.path.join(PATH, "Verdana.ttf"), 18)
 
 # Write text with weather values to the canvas
 now = time.strftime("%I:%M%p")
 date = time.strftime("%A, %m/%d")
 
-draw.text((10, 5), u"{}°".format(temperature), inky_display.BLACK, font=font50)
+draw.text((10, 5), "{}".format(weather["location"]), inky_display.BLACK, font=font18)
 
-draw.text((10, 72), now, inky_display.BLACK, font=font22)
+draw.text((10, 17), u"{}°".format(temperature), inky_display.BLACK, font=font50)
 
-draw.text((10, 95), date, inky_display.BLACK, font=font22)
+draw.text((10, 77), now, inky_display.BLACK, font=font18)
 
-# draw.text((72, 58), "{}".format(description), inky_display.BLACK, font=font)
+draw.text((10, 100), date, inky_display.BLACK, font=font18)
+
+draw.text((150, 72), "{}".format(description), inky_display.BLACK, font=font18)
 
 #w, h = 185, 10
 #shape = [(50, 50), (w, h)]
