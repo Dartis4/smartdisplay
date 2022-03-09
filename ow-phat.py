@@ -65,9 +65,9 @@ COUNTRYCODE = "US"
 
 APIkey = "c6523aa9c6438436cbb0ff25d3518190"
 
-# Query Dark Sky (https://darksky.net/) to scrape current weather data
+
 def get_weather(address):
-    #coords = get_coords(address)
+    # coords = get_coords(address)
     weather = {}
     url = "https://api.openweathermap.org/data/2.5/weather?q={cityname}&units=imperial&appid={APIkey}".format(cityname=CITY,APIkey=APIkey)
     res = requests.get(url)
@@ -83,6 +83,7 @@ def get_weather(address):
     else:
         return weather
 
+
 def create_mask(source, mask=(inky_display.WHITE, inky_display.BLACK, inky_display.RED)):
     mask_image = Image.new("1", source.size)
     w, h = source.size
@@ -97,7 +98,7 @@ def create_mask(source, mask=(inky_display.WHITE, inky_display.BLACK, inky_displ
 
 # Get the weather data for the given location
 location_string = "{city}, {countrycode}".format(city=CITY, countrycode=COUNTRYCODE)
-#print(location_string)
+# print(location_string)
 weather = get_weather(location_string)
 
 # Placeholder variables
@@ -134,13 +135,17 @@ draw.text((10, 72), now, inky_display.BLACK, font=font22)
 
 draw.text((10, 95), date, inky_display.BLACK, font=font22)
 
-#draw.text((72, 58), "{}".format(description), inky_display.BLACK, font=font)
+# draw.text((72, 58), "{}".format(description), inky_display.BLACK, font=font)
+
+w, h = 185, 10
+shape = [(50, 50), (w, h)]
+draw.rectangle(shape, fill="#000000")
 
 # Draw the current weather icon over the backdrop
 if weather["icon"] is not None:
     fpath = os.path.join(PATH, "ow-resources/{icon}.png".format(icon=weather["icon"]))
     ico = Image.open(fpath)
-    #print(ico)
+    # print(ico)
     img.paste(ico, (185, 10, 235, 60), create_mask(ico))
 
 else:
