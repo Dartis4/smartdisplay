@@ -131,7 +131,7 @@ date = time.strftime("%A, %m/%d")
 
 # Draw the current weather icon over the backdrop
 if weather["icon"] is not None:
-    fpath = os.path.join(PATH, "ow-resources/02n@2x.png".format(icon=weather["icon"]))
+    fpath = os.path.join(PATH, "ow-resources/{icon}@2x.png".format(icon=weather["icon"]))
     ico = Image.open(fpath)
     # print(ico)
     img.paste(ico, (140, -10), create_mask(ico))
