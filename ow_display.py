@@ -1,26 +1,32 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import glob
 import os
 import time
 from sys import exit
-import json
-import textwrap
 
-
-from inky.auto import auto
 from PIL import Image, ImageDraw, ImageFont
 
+import weather_data_management as data
+
+try:
+    from inky.auto import auto
+except ImportError:
+    exit("This script requires the inky module\nInstall with: sudo pip install inky")
 
 # Get the current path
 PATH = os.path.dirname(__file__)
+FONT_FACE = "Verdana.ttf"
 
 # Set up the display
 try:
     inky_display = auto(ask_user=True, verbose=True)
 except TypeError:
     raise TypeError("You need to update the Inky library to >= v1.1.0")
+
+
+def generate_font(font_face, size):
+    return ImageFont.truetype(os.path.join(PATH, font_face), size)
 
 
 def get_offset(source):
@@ -36,35 +42,39 @@ def create_mask(source, mask=(inky_display.WHITE, inky_display.BLACK, inky_displ
             p = source.getpixel((x, y))
             if p in mask:
                 mask_image.putpixel((x, y), 255)
-
     return mask_image
 
 
 def main():
+    # Check for display compatibility
     if inky_display.resolution not in ((212, 104), (250, 122)):
         w, h = inky_display.resolution
         raise RuntimeError("{}x{} is not a supported resolution".format(w, h))
+    
+    # Initialize weather info to placeholder values
+    temperature = 0
+    description = "Unknown"
+    location = "Nowhere"
+    icon = None
 
+    # Load the fonts
+    font18 = generate_font(FONT_FACE, 18)
+    font50 = generate_font(FONT_FACE, 50)
+
+    # Frame the display
     inky_display.set_border(inky_display.WHITE)
 
     # Create a new canvas to draw on
     img = Image.new("P", (inky_display.WIDTH, inky_display.HEIGHT))
     draw = ImageDraw.Draw(img)
 
-    # Load the FredokaOne font
-    font50 = ImageFont.truetype(os.path.join(PATH, "Verdana.ttf"), 50)
-    font18 = ImageFont.truetype(os.path.join(PATH, "Verdana.ttf"), 18)
-
-    with open('ow.json', 'r') as f:
-        weather = json.loads(f.readline())
-
-    temperature = 0
-    description = "Unknown"
-    icon = None
+    # Load the data from file
+    weather = data.load_weather()
 
     if weather:
         temperature = weather["temperature"]
         description = weather["description"]
+        location = weather["location"]
         icon = weather["icon"]
     else:
         print("Warning: no weather information found!")
@@ -73,15 +83,15 @@ def main():
     date = time.strftime("%A, %m/%d")
 
     # Draw the current weather icon over the backdrop
-    if weather["icon"] is not None:
-        fpath = os.path.join(PATH, "ow-resources/{icon}@2x.png".format(icon=weather["icon"]))
+    if icon is not None:
+        fpath = os.path.join(PATH, "ow-resources/{icon}@2x.png".format(icon=icon))
         ico = Image.open(fpath)
         x, y = get_offset(ico)
         img.paste(ico, (187 - x, 61 - y), create_mask(ico))
     else:
         draw.text((185, 25), "?", inky_display.BLACK, font=font50)
 
-    draw.text((10, 3), "{}".format(weather["location"]), inky_display.BLACK, font=font18)
+    draw.text((10, 3), "{}".format(location), inky_display.BLACK, font=font18)
 
     draw.text((10, 19), u"{}°".format(temperature), inky_display.BLACK, font=font50)
 

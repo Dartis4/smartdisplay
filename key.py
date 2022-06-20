@@ -1,6 +1,6 @@
 from os.path import exists
 
-DEFAULT_FILENAME = 'ow-key.txt'
+DEFAULT_FILENAME = 'key.txt'
 
 
 def check():

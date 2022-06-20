@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import key
-import glob
 import os
-import time
 from sys import exit
+
+import key
+import weather_data_management as data
 
 try:
     import json
@@ -27,7 +27,8 @@ PATH = os.path.dirname(__file__)
 
 CITY = "Rexburg"
 COUNTRYCODE = "US"
-APIkey_file = './key.txt'
+APIkey_file = 'key.txt'
+BASE_URL = 'https://api.openweathermap.org/data/2.5/weather'
 
 
 # manage the api credentials
@@ -40,12 +41,9 @@ def pull_api_key():
 
 def get_weather(ow_key, address):
     weather = {}
-    url = "https://api.openweathermap.org/data/2.5/weather?q={cityname}&units=imperial&appid={APIkey}".format(
-        cityname=CITY, APIkey=ow_key)
-    res = requests.get(url)
+    res = requests.get(f'{BASE_URL}?q={address}&units=imperial&appid={ow_key}')
     if res.status_code == 200:
-        soup = BeautifulSoup(res.content, "html.parser")
-        res = (json.loads(str(soup)))
+        res = (json.loads(str(BeautifulSoup(res.content, "html.parser"))))
         weather["location"] = res["name"]
         weather["description"] = res["weather"][0]["description"]
         weather["icon"] = res["weather"][0]["icon"]
@@ -57,26 +55,27 @@ def get_weather(ow_key, address):
 
 
 def main():
-    ow_key = pull_api_key()
+    # Placeholder variables
+    temperature = 0
+    description = "Unknown"
+    icon = None
+
     # Get the weather data for the given location
     location_string = "{city}, {countrycode}".format(city=CITY, countrycode=COUNTRYCODE)
-    # print(location_string)
-    weather = get_weather(ow_key, location_string)
-
-    # Placeholder variables
-    description = "Unknown"
-    temperature = 0
-    weather_icon = None
+    weather = get_weather(pull_api_key(), location_string)
 
     if weather:
         temperature = weather["temperature"]
         description = weather["description"]
         icon = weather["icon"]
+        print(location_string)
+        print(temperature)
+        print(description)
+        print(icon)
     else:
         print("Warning, no weather information found!")
 
-    with open("ow.json", "w") as f:
-        f.write(json.dumps(weather))
+    data.save_weather(weather)
 
 
 if __name__ == '__main__':
