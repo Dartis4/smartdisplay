@@ -20,11 +20,6 @@ try:
 except TypeError:
     raise TypeError("You need to update the Inky library to >= v1.1.0")
 
-if inky_display.resolution not in ((212, 104), (250, 122)):
-    w, h = inky_display.resolution
-    raise RuntimeError("This example does not support {}x{}".format(w, h))
-
-inky_display.set_border(inky_display.WHITE)
 
 def create_mask(source, mask=(inky_display.WHITE, inky_display.BLACK, inky_display.RED)):
     mask_image = Image.new("1", source.size)
@@ -37,36 +32,65 @@ def create_mask(source, mask=(inky_display.WHITE, inky_display.BLACK, inky_displ
 
     return mask_image
 
-# Create a new canvas to draw on
-img = Image.new("P", (inky_display.WIDTH, inky_display.HEIGHT))
-draw = ImageDraw.Draw(img)
 
-# Load the FredokaOne font
-font50 = ImageFont.truetype(os.path.join(PATH, "Verdana.ttf"), 50)
-font18 = ImageFont.truetype(os.path.join(PATH, "Verdana.ttf"), 18)
+def main():
+    if inky_display.resolution not in ((212, 104), (250, 122)):
+        w, h = inky_display.resolution
+        raise RuntimeError("{}x{} is not a supported resolution".format(w, h))
 
-# Draw the current weather icon over the backdrop
-if weather["icon"] is not None:
-    fpath = os.path.join(PATH, "ow-resources/{icon}@2x.png".format(icon=weather["icon"]))
-    ico = Image.open(fpath)
-    img.paste(ico, (140, -10), create_mask(ico))
-else:
-    draw.text((185, 25), "?", inky_display.BLACK, font=font50)
+    inky_display.set_border(inky_display.WHITE)
 
-draw.text((10, 3), "{}".format(weather["location"]), inky_display.BLACK, font=font18)
+    # Create a new canvas to draw on
+    img = Image.new("P", (inky_display.WIDTH, inky_display.HEIGHT))
+    draw = ImageDraw.Draw(img)
 
-draw.text((10, 19), u"{}°".format(temperature), inky_display.BLACK, font=font50)
+    # Load the FredokaOne font
+    font50 = ImageFont.truetype(os.path.join(PATH, "Verdana.ttf"), 50)
+    font18 = ImageFont.truetype(os.path.join(PATH, "Verdana.ttf"), 18)
 
-draw.text((10, 77), now, inky_display.BLACK, font=font18)
+    with open('ow.json', 'r') as f:
+        weather = json.loads(f.readline())
 
-draw.text((10, 100), date, inky_display.BLACK, font=font18)
+    temperature = 0
+    description = "Unknown"
+    icon = None
 
-draw.text((152, 68), "{}".format(description), inky_display.BLACK, font=font18)
+    if weather:
+        temperature = weather["temperature"]
+        description = weather["description"]
+        icon = weather["icon"]
+    else:
+        print("Warning: no weather information found!")
 
-# Flip the image around
-#inky_display.h_flip = True
-#inky_display.v_flip = True
+    now = time.strftime("%I:%M%p")
+    date = time.strftime("%A, %m/%d")
 
-# Display the weather data on Inky pHAT
-inky_display.set_image(img)
-inky_display.show()
+    # Draw the current weather icon over the backdrop
+    if weather["icon"] is not None:
+        fpath = os.path.join(PATH, "ow-resources/{icon}@2x.png".format(icon=weather["icon"]))
+        ico = Image.open(fpath)
+        img.paste(ico, (140, -10), create_mask(ico))
+    else:
+        draw.text((185, 25), "?", inky_display.BLACK, font=font50)
+
+    draw.text((10, 3), "{}".format(weather["location"]), inky_display.BLACK, font=font18)
+
+    draw.text((10, 19), u"{}°".format(temperature), inky_display.BLACK, font=font50)
+
+    draw.text((10, 77), now, inky_display.BLACK, font=font18)
+
+    draw.text((10, 100), date, inky_display.BLACK, font=font18)
+
+    draw.text((152, 68), "{}".format(description), inky_display.BLACK, font=font18)
+
+    # Flip the image around
+    #inky_display.h_flip = True
+    #inky_display.v_flip = True
+
+    # Display the weather data on Inky pHAT
+    inky_display.set_image(img)
+    inky_display.show()
+
+
+if __name__ == '__main__':
+    main()
