@@ -23,6 +23,11 @@ except TypeError:
     raise TypeError("You need to update the Inky library to >= v1.1.0")
 
 
+def get_offset(source):
+    w, h = source.size
+    return w/2, h/2
+
+
 def create_mask(source, mask=(inky_display.WHITE, inky_display.BLACK, inky_display.RED)):
     mask_image = Image.new("1", source.size)
     w, h = source.size
@@ -71,7 +76,8 @@ def main():
     if weather["icon"] is not None:
         fpath = os.path.join(PATH, "ow-resources/{icon}@2x.png".format(icon=weather["icon"]))
         ico = Image.open(fpath)
-        img.paste(ico, (150, 0), create_mask(ico))
+        x, y = get_offset(ico)
+        img.paste(ico, (187 - x, 61 - y), create_mask(ico))
     else:
         draw.text((185, 25), "?", inky_display.BLACK, font=font50)
 
@@ -83,9 +89,9 @@ def main():
 
     draw.text((10, 100), date, inky_display.BLACK, font=font18)
 
-    conditions = textwrap.wrap(f'{description}', width=9, subsequent_indent="  ")
-    for i in range(len(conditions)):
-        draw.text((152, 63 + (19 * i)), conditions[i], inky_display.BLACK, font=font18)
+    # conditions = textwrap.wrap(f'{description}', width=9, subsequent_indent="  ")
+    # for i in range(len(conditions)):
+    #     draw.text((152, 63 + (19 * i)), conditions[i], inky_display.BLACK, font=font18)
 
     # Flip the image around
     inky_display.h_flip = True
