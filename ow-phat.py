@@ -134,7 +134,7 @@ if weather["icon"] is not None:
     fpath = os.path.join(PATH, "ow-resources/{icon}@2x.png".format(icon=weather["icon"]))
     ico = Image.open(fpath)
     # print(ico)
-    img.paste(ico, (150, 10), create_mask(ico))
+    img.paste(ico, (150, 0), create_mask(ico))
 
 else:
     draw.text((185, 25), "?", inky_display.BLACK, font=font50)
