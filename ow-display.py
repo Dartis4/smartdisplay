@@ -6,6 +6,7 @@ import os
 import time
 from sys import exit
 import json
+import textwrap
 
 from inky.auto import auto
 from PIL import Image, ImageDraw, ImageFont
@@ -81,7 +82,9 @@ def main():
 
     draw.text((10, 100), date, inky_display.BLACK, font=font18)
 
-    draw.text((152, 68), "{}".format(description), inky_display.BLACK, font=font18)
+    conditions = textwrap.wrap(f'{description}', width=9, subsequent_indent=""*2)
+    for i in range(len(conditions)):
+        draw.text((152, 63 + (19 * i)), conditions[i], inky_display.BLACK, font=font18)
 
     # Flip the image around
     inky_display.h_flip = True
