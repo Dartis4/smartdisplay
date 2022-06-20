@@ -31,7 +31,7 @@ def generate_font(font_face, size):
 
 def get_offset(source):
     w, h = source.size
-    return w/2, h/2
+    return w//2, h//2
 
 
 def create_mask(source, mask=(inky_display.WHITE, inky_display.BLACK, inky_display.RED)):
