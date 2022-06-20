@@ -87,7 +87,7 @@ def main():
         fpath = os.path.join(PATH, "ow-resources/{icon}@2x.png".format(icon=icon))
         ico = Image.open(fpath)
         x, y = get_offset(ico)
-        img.paste(ico, (187 - x, 61 - y), create_mask(ico))
+        img.paste(ico, (197 - x, 56 - y), create_mask(ico))
     else:
         draw.text((185, 25), "?", inky_display.BLACK, font=font50)
 
