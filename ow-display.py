@@ -8,6 +8,7 @@ from sys import exit
 import json
 import textwrap
 
+
 from inky.auto import auto
 from PIL import Image, ImageDraw, ImageFont
 
@@ -82,7 +83,7 @@ def main():
 
     draw.text((10, 100), date, inky_display.BLACK, font=font18)
 
-    conditions = textwrap.wrap(f'{description}', width=9, subsequent_indent=""*2)
+    conditions = textwrap.wrap(f'{description}', width=9, subsequent_indent="  ")
     for i in range(len(conditions)):
         draw.text((152, 63 + (19 * i)), conditions[i], inky_display.BLACK, font=font18)
 
