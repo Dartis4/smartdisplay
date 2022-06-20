@@ -84,8 +84,8 @@ def main():
     draw.text((152, 68), "{}".format(description), inky_display.BLACK, font=font18)
 
     # Flip the image around
-    #inky_display.h_flip = True
-    #inky_display.v_flip = True
+    inky_display.h_flip = True
+    inky_display.v_flip = True
 
     # Display the weather data on Inky pHAT
     inky_display.set_image(img)
