@@ -27,7 +27,7 @@ PATH = os.path.dirname(__file__)
 
 CITY = "Rexburg"
 COUNTRYCODE = "US"
-APIkey_file = './ow-key.txt'
+APIkey_file = './key.txt'
 
 
 # manage the api credentials
