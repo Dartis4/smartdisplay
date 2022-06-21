@@ -31,7 +31,7 @@ def generate_font(font_face, size):
 
 def get_offset(source):
     w, h = source.size
-    return w//2, h//2
+    return w // 2, h // 2
 
 
 def create_mask(source, mask=(inky_display.WHITE, inky_display.BLACK, inky_display.RED)):
@@ -50,7 +50,7 @@ def main():
     if inky_display.resolution not in ((212, 104), (250, 122)):
         w, h = inky_display.resolution
         raise RuntimeError("{}x{} is not a supported resolution".format(w, h))
-    
+
     # Initialize weather info to placeholder values
     temperature = 0
     description = "Unknown"
