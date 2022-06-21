@@ -130,10 +130,5 @@ dmypy.json
 
 key.txt
 ow.json
-Daniel icon's/cloudy.png
-Daniel icon's/overcast.png
-Daniel icon's/partly-cloudy.png
-Daniel icon's/rain.png
-Daniel icon's/snow.png
-Daniel icon's/sunny.png
-Daniel icon's/thunderstorm.png
+Daniel icon's/*
+.idea
