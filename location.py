@@ -10,7 +10,7 @@ def check():
 def update():
     print('Please enter your country (Format = "COUNTRY", i.e. "GB" = Great Britain): ')
     country = input()
-    print('Please enter your location (Format = "City", i.e. "London"): ')
+    print('Please enter your city (Format = "City", i.e. "London"): ')
     city = input()
 
     location = city + ', ' + country
