@@ -5,6 +5,7 @@ import os
 from sys import exit
 
 import key
+import location
 import weather_data_management as data
 
 try:
@@ -24,10 +25,6 @@ except ImportError:
 
 # Get the current path
 PATH = os.path.dirname(__file__)
-
-CITY = "Rexburg"
-COUNTRYCODE = "US"
-APIkey_file = 'key.txt'
 BASE_URL = 'https://api.openweathermap.org/data/2.5/weather'
 
 
@@ -37,6 +34,13 @@ def pull_api_key():
         return key.return_key()
     else:
         return key.update_key()
+
+
+def pull_location():
+    if location.check():
+        return location.return_loc()
+    else:
+        return location.update_loc()
 
 
 def get_weather(ow_key, address):
@@ -61,7 +65,7 @@ def main():
     icon = None
 
     # Get the weather data for the given location
-    location_string = "{city}, {countrycode}".format(city=CITY, countrycode=COUNTRYCODE)
+    location_string = pull_location()
     weather = get_weather(pull_api_key(), location_string)
 
     if weather:
