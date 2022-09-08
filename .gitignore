@@ -128,6 +128,7 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+location.txt
 key.txt
 ow.json
 Daniel icon's/*
