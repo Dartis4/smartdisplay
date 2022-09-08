@@ -1,6 +1,7 @@
+from os import getcwd
 from os.path import exists
 
-DEFAULT_FILENAME = 'key.txt'
+DEFAULT_FILENAME = f'{getcwd()}/key.txt'
 
 
 def check():
