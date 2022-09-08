@@ -133,3 +133,4 @@ key.txt
 ow.json
 Daniel icon's/*
 .idea/*
+!/.deepsource.toml
