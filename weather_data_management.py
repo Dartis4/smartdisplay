@@ -2,7 +2,8 @@ import os
 import json
 import ow_pull
 
-DATA_FILE = 'ow.json'
+PATH = os.path.dirname(__file__)
+DATA_FILE = os.path.join(PATH, 'ow.json')
 
 
 def save_weather(weather):
