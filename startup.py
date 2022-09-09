@@ -1,6 +1,5 @@
 import os
 from PIL import Image, ImageFont, ImageDraw
-import weather_data_management as data
 
 try:
     from inky.auto import auto
@@ -21,16 +20,21 @@ def generate_font(font_face, size):
     return ImageFont.truetype(os.path.join(PATH, font_face), size)
 
 
-font = generate_font(FONT_FACE, 22)
+def main():
+    img = Image.new("P", (inky_display.WIDTH, inky_display.HEIGHT))
+    draw = ImageDraw.Draw(img)
 
-img = Image.new("P", (inky_display.WIDTH, inky_display.HEIGHT))
-draw = ImageDraw.Draw(img)
+    font = generate_font(FONT_FACE, 22)
 
-message = "Welcome!"
-w, h = font.getsize(message)
-x = (inky_display.WIDTH / 2) - (w / 2)
-y = (inky_display.HEIGHT / 2) - (h / 2)
+    message = "Welcome!"
+    w, h = font.getsize(message)
+    x = (inky_display.WIDTH / 2) - (w / 2)
+    y = (inky_display.HEIGHT / 2) - (h / 2)
 
-draw.text((x, y), message, inky_display.RED, font)
-inky_display.set_image(img)
-inky_display.show()
+    draw.text((x, y), message, inky_display.BLACK, font)
+    inky_display.set_image(img)
+    inky_display.show()
+
+
+if __name__ == '__main__':
+    main()
