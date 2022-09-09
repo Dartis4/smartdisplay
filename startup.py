@@ -24,7 +24,7 @@ def main():
     img = Image.new("P", (inky_display.WIDTH, inky_display.HEIGHT))
     draw = ImageDraw.Draw(img)
 
-    font = generate_font(FONT_FACE, 50)
+    font = generate_font(FONT_FACE, 40)
 
     message = "Welcome!"
     w, h = font.getsize(message)
