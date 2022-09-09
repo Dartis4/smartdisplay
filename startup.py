@@ -32,6 +32,11 @@ def main():
     y = (inky_display.HEIGHT / 2) - (h / 2)
 
     draw.text((x, y), message, inky_display.BLACK, font)
+
+    # Flip the image around
+    inky_display.h_flip = True
+    inky_display.v_flip = True
+
     inky_display.set_image(img)
     inky_display.show()
 
