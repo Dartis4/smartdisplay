@@ -49,7 +49,7 @@ def main():
     # Check for display compatibility
     if inky_display.resolution not in ((212, 104), (250, 122)):
         w, h = inky_display.resolution
-        raise RuntimeError("{0}x{1} is not a supported resolution".format(w, h))
+        raise RuntimeError(f"{w}x{h} is not a supported resolution")
 
     # Initialize weather info to placeholder values
     temperature = 0
