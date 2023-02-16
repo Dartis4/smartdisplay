@@ -1,5 +1,6 @@
-import os
 import json
+import os
+
 import ow_pull
 
 PATH = os.path.dirname(__file__)

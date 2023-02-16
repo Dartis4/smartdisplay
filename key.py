@@ -14,6 +14,7 @@ def update():
     key = input().strip().lower()
     with open(DEFAULT_FILENAME, 'w') as f:
         f.write(key)
+        print('Key saved.')
         return key
 
 

@@ -12,10 +12,12 @@ def check():
 def update():
     print('Please enter your country (Format = "COUNTRY", i.e. "GB" = Great Britain): ')
     country = input()
+    print('Please enter your state if applicable (Format = "STATE", i.e. "NY" = New York): ')
+    state = input()
     print('Please enter your city (Format = "City", i.e. "London"): ')
     city = input()
 
-    location = city + ', ' + country
+    location = city + ', ' + state + ', ' + country
 
     with open(DEFAULT_FILENAME, 'w') as f:
         f.write(location)
