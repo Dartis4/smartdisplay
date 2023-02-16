@@ -47,7 +47,7 @@ def create_mask(source, mask=(inky_display.WHITE, inky_display.BLACK, inky_displ
 
 def main():
     # Check for display compatibility
-    if inky_display.resolution not in ((212, 104), (250, 122)):
+    if inky_display.resolution not in ((212, 104), (250, 122), (400, 300)):
         w, h = inky_display.resolution
         raise RuntimeError(f"{inky_display.WIDTH}x{inky_display.HEIGHT} is not a supported resolution")
 
