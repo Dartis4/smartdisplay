@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 from sys import exit
 
+import ow_pull
+
 try:
     import json
 except ImportError:
@@ -16,7 +18,6 @@ try:
     from bs4 import BeautifulSoup
 except ImportError:
     exit("This script requires the bs4 module\nInstall with: sudo pip install beautifulsoup4==4.6.3")
-
 
 def fetch_base_address(api_id):
     print(api_id)
@@ -38,7 +39,8 @@ def fetch_params(api_id):
 
 def fetch_key(api_id):
     print(api_id)
-    key = {'appid': ["c6523aa9c6438436cbb0ff25d3518190", ""]}
+    token = ow_pull.pull_api_key()
+    key = {'appid': [token, ""]}
     return key
 
 
