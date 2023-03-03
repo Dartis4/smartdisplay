@@ -2,7 +2,7 @@ import os
 from os.path import exists
 
 PATH = os.path.dirname(__file__)
-DEFAULT_FILENAME = os.path.join(PATH, 'key.txt')
+DEFAULT_FILENAME = os.path.join(PATH, 'keys/key.txt')
 
 
 def check():
