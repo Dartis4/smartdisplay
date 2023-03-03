@@ -4,7 +4,7 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.10.9 WSL (Ubuntu): (/home/dartis/smart-display-webserver/bin/python3.10)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.8.10 WSL (Ubuntu): (/home/dartis/senior-project/bin/python3)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
