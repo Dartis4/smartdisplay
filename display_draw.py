@@ -22,6 +22,7 @@ except TypeError:
 
 
 def update(data_dict: dict):
+    print(data_dict)
     if inky_display.resolution not in ((212, 104), (250, 122), (400, 300)):
         raise RuntimeError(f"{inky_display.WIDTH}x{inky_display.HEIGHT} is not a supported resolution")
 
@@ -47,10 +48,11 @@ def update(data_dict: dict):
     img = Image.new("P", (inky_display.WIDTH, inky_display.HEIGHT))
 
     for layer in layers:
-        img.paste(layer, layer.position)
+        x, y = layer.position
+        img.paste(layer.image, (int(x), int(y)), create_mask(layer.image))
 
-    inky_display.h_flip = True
-    inky_display.v_flip = True
+    # inky_display.h_flip = True
+    # inky_display.v_flip = True
 
     inky_display.set_image(img)
     inky_display.show()
