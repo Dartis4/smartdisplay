@@ -14,6 +14,7 @@ from display_draw import update
 def main():
     """ Main entry point of the app """
     data = get_data()
+    print(data)
     update(data)
 
 

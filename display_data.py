@@ -47,9 +47,9 @@ def get_data():
 
     data_dict = {
         "second_on_top": get_order(),
-        "main": get_main(data["temperature"]),
-        "secondary": get_secondary(data["location"]),
+        "main": get_main(data["main"]["temp"]),
+        "secondary": get_secondary(data["name"]),
         "datetime": get_datetime(),
-        "image": get_image(data["icon"])
+        "image": get_image(data["weather"][0]["icon"])
     }
     return data_dict
