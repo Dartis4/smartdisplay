@@ -28,7 +28,7 @@ class Zone:
 
 
 class Layer:
-    def __init__(self, zone, image):
+    def __init__(self, zone: Zone, image: Image):
         self.zone = zone
         self.image = image
         self.position = (zone.x, zone.y)
@@ -64,7 +64,7 @@ class ZoneFormatter:
     def __init__(self, width, height, secondary_zone_on_top=True):
         self.second_zone_on_top = secondary_zone_on_top
         self.window = Window(width, height)
-        self.canvas = ImageDraw.Draw(Image.new("P", (self.window.width, self.window.height)))
+        self.canvas = ImageDraw.Draw(Image.new("P", (int(self.window.width), int(self.window.height))))
         margin = self.window.get_margin()
         self.start_x = margin.height
         self.start_y = margin.width
@@ -98,7 +98,7 @@ class ZoneFormatter:
 
         image_layer = data.convert("RGB").quantize(palette=palette)
 
-        return image_layer.resize((zone.dimension.width, zone.dimension.height), resample=Image.LANCZOS)
+        return image_layer.resize((int(zone.dimension.width), int(zone.dimension.height)), resample=Image.LANCZOS)
 
     def _main_zone_layout(self) -> Zone:
         dimensions = self.window.get_main_box()
