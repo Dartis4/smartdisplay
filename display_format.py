@@ -57,7 +57,7 @@ class ZoneFormatter:
     def __init__(self, width, height, secondary_zone_on_top=True):
         self.second_zone_on_top = secondary_zone_on_top
         self.window = Window(width, height)
-        self.canvas = ImageDraw.Draw(Image.new("P", (self.window.width, self.window.height)))
+        self.canvas = ImageDraw.Draw(Image.new("P", (int(self.window.width), int(self.window.height))))
         margin = self.window.get_margin()
         self.start_x = margin.height
         self.start_y = margin.width
