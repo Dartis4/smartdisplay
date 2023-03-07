@@ -117,7 +117,9 @@ class ZoneFormatter:
     def _datetime_zone_layout(self) -> Zone:
         dimensions = self.window.get_datetime_box()
         x = self.start_x
-        y = self.window.height - dimensions.height
+        main = self._main_zone_layout()
+        second = self._secondary_zone_layout()
+        y = self.start_y + main.dimension.height + second.dimension.height
         return Zone(x, y, dimensions)
 
     def zone_main(self, data: Text) -> Image:
