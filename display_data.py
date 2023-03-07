@@ -44,7 +44,7 @@ def get_image(data):
 def get_datetime():
     now = time.strftime("%I:%M%p")
     date = time.strftime("%A, %m/%d")
-    return Text(now, FONT), Text(date, FONT)
+    return Text(now, FONT, 'red'), Text(date, FONT, 'red')
 
 
 def get_data():

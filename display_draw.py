@@ -49,7 +49,7 @@ def update(data_dict: dict):
     #           formatter.zone_image(data_dict["image"])]
 
     def draw_text(context, position, content, color, font):
-        context.text(position, content, font=font)
+        context.text(position, content, color, font=font)
 
     img = Image.new("P", (inky_display.WIDTH, inky_display.HEIGHT))
     draw = ImageDraw.Draw(img)
