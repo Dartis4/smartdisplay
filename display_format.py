@@ -16,14 +16,14 @@ from display_text import Text
 
 @dataclass
 class Rectangle:
-    width: int
-    height: int
+    width: float
+    height: float
 
 
 @dataclass
 class Zone:
-    x: int
-    y: int
+    x: float
+    y: float
     dimension: Rectangle
 
 
@@ -42,14 +42,14 @@ class Window:
         return Rectangle(self.width * 0.6, self.height * 0.5)
 
     def get_secondary_box(self):
-        return Rectangle(self.width * 0.6, int(self.OTHER_TEXT_HEIGHT_RATIO))
+        return Rectangle(self.width * 0.6, self.OTHER_TEXT_HEIGHT_RATIO)
 
     def get_image_box(self):
         width = height = self.width * 0.3
         return Rectangle(width, height)
 
     def get_datetime_box(self):
-        return Rectangle(self.width * 0.6, int(self.OTHER_TEXT_HEIGHT_RATIO * 2))
+        return Rectangle(self.width * 0.6, self.OTHER_TEXT_HEIGHT_RATIO * 2)
 
 
 class ZoneFormatter:
@@ -57,7 +57,7 @@ class ZoneFormatter:
     def __init__(self, width, height, secondary_zone_on_top=True):
         self.second_zone_on_top = secondary_zone_on_top
         self.window = Window(width, height)
-        self.canvas = ImageDraw.Draw(Image.new("P", (int(self.window.width), int(self.window.height))))
+        self.canvas = ImageDraw.Draw(Image.new("P", (self.window.width, self.window.height)))
         margin = self.window.get_margin()
         self.start_x = margin.height
         self.start_y = margin.width
