@@ -134,7 +134,7 @@ class ZoneFormatter:
         print("Date dimensions:", dimensions)
         x = int(self.window.width * 0.04)
         y = int(self.window.height * 0.82)
-        if y + dimensions.height > self.window.height - self.start_y:
+        if y + dimensions.height > self.window.height:
             print("Height error date")
         return Zone(x, y, dimensions)
 
