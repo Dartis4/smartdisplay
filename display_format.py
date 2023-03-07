@@ -110,8 +110,8 @@ class ZoneFormatter:
 
     def _image_zone_layout(self) -> Zone:
         dimensions = self.window.get_image_box()
-        x = self.window.width - dimensions.width - (self.window.width * 0.062)
-        y = self.start_y + self.window.get_secondary_box().height
+        x = int(self.window.width - dimensions.width - (self.window.width * 0.062))
+        y = int(self.start_y + self.window.get_secondary_box().height)
         return Zone(x, y, dimensions)
 
     def _datetime_zone_layout(self) -> Zone:
