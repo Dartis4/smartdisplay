@@ -36,7 +36,7 @@ class Window:
         self.height = height #- (height * 0.02)
 
     def get_margin(self):
-        return Rectangle(self.width * 0.04, self.height * 0.02)
+        return Rectangle(self.width * 0.06, self.height * 0.02)
 
     def get_main_box(self):
         return Rectangle(self.width * 0.6, self.height * 0.5)
@@ -86,7 +86,8 @@ class ZoneFormatter:
     @staticmethod
     def __image_zone(data: str, zone: Zone) -> Image:
         img = Image.open(data)
-        return img.resize((int(zone.dimension.width), int(zone.dimension.height))), (zone.x, zone.y)
+        new_img = img.resize((int(zone.dimension.width), int(zone.dimension.height)))
+        return new_img, (zone.x, zone.y)
 
 
     def _main_zone_layout(self) -> Zone:
@@ -109,8 +110,8 @@ class ZoneFormatter:
 
     def _image_zone_layout(self) -> Zone:
         dimensions = self.window.get_image_box()
-        x = self.window.width - dimensions.width
-        y = self.start_y
+        x = self.window.width - dimensions.width - (self.window.width * 0.062)
+        y = self.start_y + self.window.get_secondary_box().height
         return Zone(x, y, dimensions)
 
     def _datetime_zone_layout(self) -> Zone:
