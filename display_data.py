@@ -53,9 +53,8 @@ def get_data():
     save_weather(fetch_info(ID))
     data = load_weather()
     print(int(data["main"]["temp"]))
+
     print(data["name"])
-    x, y = get_datetime()
-    print(x.content, y.content)
     print(data["weather"][0]["icon"])
 
     data_dict = {

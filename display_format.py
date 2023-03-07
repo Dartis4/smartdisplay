@@ -95,6 +95,7 @@ class ZoneFormatter:
 
     def _main_zone_layout(self):
         dimensions = self.window.get_main_box()
+        print("Main dimensions:", dimensions)
         if not self.second_zone_on_top:
             return Zone(self.start_x, self.start_y, dimensions)
         else:
@@ -104,6 +105,7 @@ class ZoneFormatter:
 
     def _secondary_zone_layout(self):
         dimensions = self.window.get_secondary_box()
+        print("Secondary dimensions:", dimensions)
         if self.second_zone_on_top:
             return Zone(self.start_x, self.start_y, dimensions)
         else:
@@ -113,6 +115,7 @@ class ZoneFormatter:
 
     def _image_zone_layout(self):
         dimensions = self.window.get_image_box()
+        print("Image dimensions:", dimensions)
         x = int((self.window.width * 0.79) - dimensions.width // 2)
         y = int((self.window.height * 0.46) - dimensions.height // 2)
         return Zone(x, y, dimensions)
