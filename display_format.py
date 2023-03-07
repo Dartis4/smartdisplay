@@ -61,8 +61,8 @@ class ZoneFormatter:
         self.window = Window(width, height)
         self.canvas = ImageDraw.Draw(Image.new("P", (int(self.window.width), int(self.window.height))))
         margin = self.window.get_margin()
-        self.start_x = margin.height
-        self.start_y = margin.width
+        self.start_x = margin.width
+        self.start_y = margin.height
 
     def __text_zone(self, data: Text, zone: Zone):
         def text_is_smaller(box, zone_target):
