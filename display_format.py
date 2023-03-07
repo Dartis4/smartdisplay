@@ -36,7 +36,7 @@ class Window:
         self.height = height #- (height * 0.02)
 
     def get_margin(self):
-        return Rectangle(self.width * 0.06, self.height * 0.02)
+        return Rectangle(self.width * 0.04, self.height * 0.02)
 
     def get_main_box(self):
         return Rectangle(self.width * 0.6, self.height * 0.5)
