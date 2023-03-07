@@ -20,25 +20,25 @@ except ImportError:
     exit("This script requires the bs4 module\nInstall with: sudo pip install beautifulsoup4==4.6.3")
 
 def fetch_base_address(api_id):
-    print(api_id)
+    # print(api_id)
     address = "https://api.openweathermap.org/data/2.5/weather"
     return address
 
 
 def fetch_format(api_id):
-    print(api_id)
+    # print(api_id)
     data_format = ""
     return data_format
 
 
 def fetch_params(api_id):
-    print(api_id)
+    # print(api_id)
     params = {"q": ["Rexburg", "ID", "US", ","], "units": ["imperial", ""]}
     return params
 
 
 def fetch_key(api_id):
-    print(api_id)
+    # print(api_id)
     token = ow_pull.pull_api_key()
     key = {'appid': [token, ""]}
     return key

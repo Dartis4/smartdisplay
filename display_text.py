@@ -10,6 +10,15 @@ import os.path
 
 from PIL import ImageFont
 
+try:
+    import inky.auto as auto
+except ImportError:
+    exit("This script requires the inky module\nInstall with: sudo pip install inky")
+
+try:
+    inky_display = auto(ask_user=True, verbose=True)
+except TypeError:
+    raise TypeError("You need to update the Inky library to >= v1.1.0")
 
 class Font:
     # class variables
@@ -34,9 +43,17 @@ class Font:
 
 class Text:
     # class variables
-
     def __init__(self, content: str, font: Font, color: str = 'black'):
         # instance variables
         self.font = font
         self.content = content
-        self.color = color
+        c = 0
+        if color == 'black':
+            c = inky_display.BLACK
+        if color == 'red':
+            c = inky_display.RED
+        if color == 'white':
+            c = inky_display.WHITE
+        if color == 'yellow':
+            c = inky_display.YELLOW
+        self.color = c

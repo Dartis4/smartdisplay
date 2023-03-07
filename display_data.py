@@ -22,7 +22,7 @@ ID = 123
 
 
 def get_order():
-    return True
+    return False
 
 
 def get_main(data) -> Text:
@@ -50,10 +50,15 @@ def get_datetime() -> Tuple[Text, Text]:
 def get_data():
     save_weather(fetch_info(ID))
     data = load_weather()
+    print(int(data["main"]["temp"]))
+    print(data["name"])
+    x, y = get_datetime()
+    print(x.content, y.content)
+    print(data["weather"][0]["icon"])
 
     data_dict = {
         "second_on_top": get_order(),
-        "main": get_main(data["main"]["temp"]),
+        "main": get_main(int(data["main"]["temp"])),
         "secondary": get_secondary(data["name"]),
         "datetime": get_datetime(),
         "image": get_image(data["weather"][0]["icon"])

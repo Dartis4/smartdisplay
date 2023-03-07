@@ -74,7 +74,7 @@ class ZoneFormatter:
             _, _, right, bottom = box
             t_right = zone_target.x + zone_target.dimension.width
             t_bottom = zone_target.y + zone_target.dimension.height
-            if right < t_right or bottom < t_bottom:
+            if right < t_right and bottom < t_bottom:
                 return True
             else:
                 return False
@@ -93,12 +93,7 @@ class ZoneFormatter:
 
     @staticmethod
     def __image_zone(data: Image, zone: Zone) -> Image:
-        palette = Image.new("P", (1, 1))
-        palette.putpalette((255, 255, 255, 0, 0, 0, 255, 0, 0) + (0, 0, 0) * 252)
-
-        image_layer = data.convert("RGB").quantize(palette=palette)
-
-        return image_layer.resize((int(zone.dimension.width), int(zone.dimension.height)), resample=Image.LANCZOS)
+        return data.resize((int(zone.dimension.width), int(zone.dimension.height)))
 
     def _main_zone_layout(self) -> Zone:
         dimensions = self.window.get_main_box()
@@ -120,7 +115,7 @@ class ZoneFormatter:
 
     def _image_zone_layout(self) -> Zone:
         dimensions = self.window.get_image_box()
-        x = self.window.width - dimensions.width
+        x = self.window.width - dimensions.width - self.start_x
         y = self.start_y
         return Zone(x, y, dimensions)
 
