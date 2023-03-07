@@ -20,6 +20,7 @@ try:
 except TypeError:
     raise TypeError("You need to update the Inky library to >= v1.1.0")
 
+
 class Font:
     # class variables
     PATH = os.path.join(os.path.dirname(__file__), "res/fonts")

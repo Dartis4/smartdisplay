@@ -6,6 +6,8 @@ __author__ = "Dane Artis"
 __version__ = "0.1.0"
 __license__ = "MIT"
 
+import functools
+
 from PIL import Image, ImageDraw
 
 try:
@@ -49,13 +51,15 @@ def update(data_dict: dict):
     def draw_text(context, position, content, color, font):
         context.text(position, content, color, font=font)
 
-
     img = Image.new("P", (inky_display.WIDTH, inky_display.HEIGHT))
     draw = ImageDraw.Draw(img)
 
-    draw_text(draw, *formatter.zone_main(data_dict["main"]))
-    draw_text(draw, *formatter.zone_secondary(data_dict["secondary"]))
-    draw_text(draw, *formatter.zone_datetime(data_dict["datetime"]))
+    draw_text_here = functools.partial(draw_text, draw)
+
+    draw_text_here(*formatter.zone_main(data_dict["main"]))
+    draw_text_here(*formatter.zone_secondary(data_dict["secondary"]))
+    map(draw_text_here, *formatter.zone_datetime(data_dict["datetime"]))
+
     img.paste(*formatter.zone_image(data_dict["image"]))
 
     inky_display.h_flip = True

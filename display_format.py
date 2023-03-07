@@ -121,13 +121,13 @@ class ZoneFormatter:
         dimensions = self.window.get_time_box()
         x = int(self.window.width * 0.04)
         y = int(self.window.height * 0.63)
-        return
+        return Zone(x, y, dimensions)
 
     def _date_zone_layout(self):
         dimensions = self.window.get_date_box()
         x = int(self.window.width * 0.04)
         y = int(self.window.height * 0.82)
-        return
+        return Zone(x, y, dimensions)
 
     def zone_main(self, data: Text):
         # Main info - this will be the largest display zone and
@@ -160,7 +160,5 @@ class ZoneFormatter:
         # This will be a static zone for displaying the date
         # and time. The user will not be able to modify this
         # data directly.
-        date, time = data
-        datetime = Text("\n".join((date.content, time.content)), date.font, date.color)
-        zone = self._datetime_zone_layout()
-        return self.__text_zone(datetime, zone)
+        time, date = data
+        return self.__text_zone(time, self._time_zone_layout()), self.__text_zone(date, self._date_zone_layout())
