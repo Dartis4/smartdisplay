@@ -60,7 +60,7 @@ def get_data():
     data_dict = {
         "second_on_top": get_order(),
         "main": get_main(int(data["main"]["temp"])),
-        "secondary": get_secondary(time.strftime("%I:%M%p")),
+        "secondary": get_secondary(data["name"]),
         "datetime": get_datetime(),
         "image": get_image(data["weather"][0]["icon"])
     }

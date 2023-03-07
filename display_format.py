@@ -125,6 +125,8 @@ class ZoneFormatter:
         print("Time dimensions:", dimensions)
         x = int(self.window.width * 0.04)
         y = int(self.window.height * 0.63)
+        if y + dimensions.height > self.window.height - self.start_y:
+            print("Height error time")
         return Zone(x, y, dimensions)
 
     def _date_zone_layout(self):
@@ -132,6 +134,8 @@ class ZoneFormatter:
         print("Date dimensions:", dimensions)
         x = int(self.window.width * 0.04)
         y = int(self.window.height * 0.82)
+        if y + dimensions.height > self.window.height - self.start_y:
+            print("Height error date")
         return Zone(x, y, dimensions)
 
     def zone_main(self, data: Text):
