@@ -16,31 +16,24 @@ from display_text import Text
 
 @dataclass
 class Rectangle:
-    width: float
-    height: float
+    width: int
+    height: int
 
 
 @dataclass
 class Zone:
-    x: float
-    y: float
+    x: int
+    y: int
     dimension: Rectangle
-
-
-class Layer:
-    def __init__(self, zone: Zone, image: Image):
-        self.zone = zone
-        self.image = image
-        self.position = (zone.x, zone.y)
 
 
 class Window:
     OTHER_TEXT_HEIGHT_RATIO = 0.16
 
     def __init__(self, width, _height):
-        self.width = width
+        self.width = width #- (width * 0.04)
         height = width * 0.488
-        self.height = height
+        self.height = height #- (height * 0.02)
 
     def get_margin(self):
         return Rectangle(self.width * 0.04, self.height * 0.02)
@@ -49,14 +42,14 @@ class Window:
         return Rectangle(self.width * 0.6, self.height * 0.5)
 
     def get_secondary_box(self):
-        return Rectangle(self.width * 0.6, self.OTHER_TEXT_HEIGHT_RATIO)
+        return Rectangle(self.width * 0.6, int(self.OTHER_TEXT_HEIGHT_RATIO))
 
     def get_image_box(self):
         width = height = self.width * 0.3
         return Rectangle(width, height)
 
     def get_datetime_box(self):
-        return Rectangle(self.width * 0.6, self.OTHER_TEXT_HEIGHT_RATIO * 2)
+        return Rectangle(self.width * 0.6, int(self.OTHER_TEXT_HEIGHT_RATIO * 2))
 
 
 class ZoneFormatter:
@@ -86,14 +79,13 @@ class ZoneFormatter:
             return start_size
 
         font_size = find_largest_possible_font_size(self.canvas, data, zone)
-        img = Image.new("P", (int(zone.dimension.width), int(zone.dimension.height)))
-        text_layer = ImageDraw.Draw(img)
-        text_layer.text((0, 0), data.content, data.color, font=data.font.generate(font_size))
-        return img
+        return (zone.x, zone.y), data.content, data.color, data.font.generate(font_size)
 
     @staticmethod
-    def __image_zone(data: Image, zone: Zone) -> Image:
-        return data.resize((int(zone.dimension.width), int(zone.dimension.height)))
+    def __image_zone(data: str, zone: Zone) -> Image:
+        img = Image.open(data)
+        return img.resize((int(zone.dimension.width), int(zone.dimension.height))), (zone.x, zone.y)
+
 
     def _main_zone_layout(self) -> Zone:
         dimensions = self.window.get_main_box()
@@ -115,8 +107,8 @@ class ZoneFormatter:
 
     def _image_zone_layout(self) -> Zone:
         dimensions = self.window.get_image_box()
-        x = self.window.width - dimensions.width - self.start_x
-        y = self.start_y
+        x = int(self.window.width - dimensions.width)
+        y = int(self.start_y)
         return Zone(x, y, dimensions)
 
     def _datetime_zone_layout(self) -> Zone:
@@ -129,20 +121,20 @@ class ZoneFormatter:
         # Main info - this will be the largest display zone and
         # should contain the most important info
         zone = self._main_zone_layout()
-        return Layer(zone, self.__text_zone(data, zone))
+        return self.__text_zone(data, zone)
 
     def zone_secondary(self, data: Text) -> Image:
         # Secondary info - this will be a smaller descriptor of
         # the data that is in the main zone or additional info that
         # pairs with the main zone
         zone = self._secondary_zone_layout()
-        return Layer(zone, self.__text_zone(data, zone))
+        return self.__text_zone(data, zone)
 
     def zone_image(self, data: Image) -> Image:
         # Icon - an appropriate image that pairs with the data
         # being displayed that adds additional context
         zone = self._image_zone_layout()
-        return Layer(zone, self.__image_zone(data, zone))
+        return self.__image_zone(data, zone)
 
     def zone_datetime(self, data: Tuple[Text, Text]) -> Image:
         # This will be a static zone for displaying the date
@@ -151,4 +143,4 @@ class ZoneFormatter:
         date, time = data
         datetime = Text("\n".join((date.content, time.content)), date.font, date.color)
         zone = self._datetime_zone_layout()
-        return Layer(zone, self.__text_zone(datetime, zone))
+        return self.__text_zone(datetime, zone)

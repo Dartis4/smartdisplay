@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 Module Docstring
 """
@@ -8,7 +10,6 @@ __license__ = "MIT"
 
 import os
 import time
-from typing import Tuple
 
 from PIL import Image
 
@@ -25,23 +26,22 @@ def get_order():
     return False
 
 
-def get_main(data) -> Text:
+def get_main(data):
     text = u"{}°".format(data)
     return Text(text, FONT)
 
 
-def get_secondary(data) -> Text:
+def get_secondary(data):
     text = "{}".format(data)
     return Text(text, FONT)
 
 
-def get_image(data) -> Image:
+def get_image(data):
     if data is not None:
-        fpath = os.path.join(PATH, "ow-resources/{icon}@2x.png".format(icon=data))
-        return Image.open(fpath)
+        return os.path.join(PATH, "ow-resources/{icon}@2x.png".format(icon=data))
 
 
-def get_datetime() -> Tuple[Text, Text]:
+def get_datetime():
     now = time.strftime("%I:%M%p")
     date = time.strftime("%A, %m/%d")
     return Text(now, FONT), Text(date, FONT)

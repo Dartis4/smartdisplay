@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 Module Docstring
 """
@@ -13,9 +14,7 @@ from display_draw import update
 
 def main():
     """ Main entry point of the app """
-    data = get_data()
-    print(data)
-    update(data)
+    update(get_data())
 
 
 if __name__ == "__main__":

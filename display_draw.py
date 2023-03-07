@@ -6,7 +6,7 @@ __author__ = "Dane Artis"
 __version__ = "0.1.0"
 __license__ = "MIT"
 
-from PIL import Image
+from PIL import Image, ImageDraw
 
 try:
     import inky.auto as auto
@@ -46,13 +46,17 @@ def update(data_dict: dict):
     #           formatter.zone_datetime(data_dict["datetime"]),
     #           formatter.zone_image(data_dict["image"])]
 
-    layers = [formatter.zone_secondary(data_dict["secondary"])]
+    def draw_text(context, position, content, color, font):
+        context.text(position, content, color, font=font)
+
 
     img = Image.new("P", (inky_display.WIDTH, inky_display.HEIGHT))
+    draw = ImageDraw.Draw(img)
 
-    for layer in layers:
-        x, y = layer.position
-        img.paste(layer.image, (int(x), int(y)))
+    draw_text(draw, *formatter.zone_main(data_dict["main"]))
+    draw_text(draw, *formatter.zone_secondary(data_dict["secondary"]))
+    draw_text(draw, *formatter.zone_datetime(data_dict["datetime"]))
+    img.paste(*formatter.zone_image(data_dict["image"]))
 
     inky_display.h_flip = True
     inky_display.v_flip = True

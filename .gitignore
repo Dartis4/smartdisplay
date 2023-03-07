@@ -129,7 +129,7 @@ dmypy.json
 .pyre/
 
 location.txt
-key.txt
+keys/key.txt
 ow.json
 Daniel icon's/*
 .idea/*
