@@ -43,8 +43,10 @@ def get_image(data):
 
 def get_datetime():
     now = time.strftime("%I:%M%p")
+    print("Time:", now)
     date = time.strftime("%A, %m/%d")
-    return Text(now, FONT, 'red'), Text(date, FONT, 'red')
+    print("Date:", date)
+    return Text(now, FONT), Text(date, FONT)
 
 
 def get_data():

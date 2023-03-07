@@ -119,12 +119,14 @@ class ZoneFormatter:
 
     def _time_zone_layout(self):
         dimensions = self.window.get_time_box()
+        print("Time dimensions:", dimensions)
         x = int(self.window.width * 0.04)
         y = int(self.window.height * 0.63)
         return Zone(x, y, dimensions)
 
     def _date_zone_layout(self):
         dimensions = self.window.get_date_box()
+        print("Date dimensions:", dimensions)
         x = int(self.window.width * 0.04)
         y = int(self.window.height * 0.82)
         return Zone(x, y, dimensions)
