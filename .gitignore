@@ -132,5 +132,5 @@ location.txt
 keys/key.txt
 ow.json
 Daniel icon's/*
-.idea/*
+.idea/
 !/.deepsource.toml
