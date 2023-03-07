@@ -42,14 +42,16 @@ class Window:
         return Rectangle(self.width * 0.6, self.height * 0.5)
 
     def get_secondary_box(self):
-        return Rectangle(self.width * 0.6, self.OTHER_TEXT_HEIGHT_RATIO)
+        width = self.width * 0.6
+        return Rectangle(width, width * self.OTHER_TEXT_HEIGHT_RATIO)
 
     def get_image_box(self):
         width = height = self.width * 0.3
         return Rectangle(width, height)
 
     def get_datetime_box(self):
-        return Rectangle(self.width * 0.6, self.OTHER_TEXT_HEIGHT_RATIO * 2)
+        width = self.width * 0.6
+        return Rectangle(width, width * self.OTHER_TEXT_HEIGHT_RATIO)
 
 
 class ZoneFormatter:
