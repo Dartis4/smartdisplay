@@ -51,7 +51,7 @@ class Window:
 
     def get_datetime_box(self):
         width = self.width * 0.6
-        return Rectangle(width, width * self.OTHER_TEXT_HEIGHT_RATIO)
+        return Rectangle(width, width * self.OTHER_TEXT_HEIGHT_RATIO * 2)
 
 
 class ZoneFormatter:
