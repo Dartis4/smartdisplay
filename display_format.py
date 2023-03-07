@@ -31,9 +31,9 @@ class Window:
     OTHER_TEXT_HEIGHT_RATIO = 0.16
 
     def __init__(self, width, _height):
-        self.width = width #- (width * 0.04)
+        self.width = width  # - (width * 0.04)
         height = width * 0.488
-        self.height = height #- (height * 0.02)
+        self.height = height  # - (height * 0.02)
 
     def get_margin(self):
         return Rectangle(self.width * 0.04, self.height * 0.02)
@@ -49,9 +49,13 @@ class Window:
         width = height = self.width * 0.3
         return Rectangle(width, height)
 
-    def get_datetime_box(self):
+    def get_time_box(self):
         width = self.width * 0.6
-        return Rectangle(width, width * self.OTHER_TEXT_HEIGHT_RATIO * 2)
+        return Rectangle(width, width * self.OTHER_TEXT_HEIGHT_RATIO)
+
+    def get_date_box(self):
+        width = self.width * 0.6
+        return Rectangle(width, width * self.OTHER_TEXT_HEIGHT_RATIO)
 
 
 class ZoneFormatter:
@@ -84,13 +88,12 @@ class ZoneFormatter:
         return (zone.x, zone.y), data.content, data.color, data.font.generate(font_size)
 
     @staticmethod
-    def __image_zone(data: str, zone: Zone) -> Image:
+    def __image_zone(data: str, zone: Zone):
         img = Image.open(data)
         new_img = img.resize((int(zone.dimension.width), int(zone.dimension.height)))
         return new_img, (zone.x, zone.y)
 
-
-    def _main_zone_layout(self) -> Zone:
+    def _main_zone_layout(self):
         dimensions = self.window.get_main_box()
         if not self.second_zone_on_top:
             return Zone(self.start_x, self.start_y, dimensions)
@@ -99,7 +102,7 @@ class ZoneFormatter:
             y = self.start_y + self.window.get_secondary_box().height
             return Zone(x, y, dimensions)
 
-    def _secondary_zone_layout(self) -> Zone:
+    def _secondary_zone_layout(self):
         dimensions = self.window.get_secondary_box()
         if self.second_zone_on_top:
             return Zone(self.start_x, self.start_y, dimensions)
@@ -108,38 +111,50 @@ class ZoneFormatter:
             y = self.start_y + self.window.get_main_box().height
             return Zone(x, y, dimensions)
 
-    def _image_zone_layout(self) -> Zone:
+    def _image_zone_layout(self):
         dimensions = self.window.get_image_box()
-        x = int(self.window.width - dimensions.width - (self.window.width * 0.062))
-        y = int(self.start_y + self.window.get_secondary_box().height)
+        x = int((self.window.width * 0.79) - dimensions.width // 2)
+        y = int((self.window.height * 0.46) - dimensions.height // 2)
         return Zone(x, y, dimensions)
 
-    def _datetime_zone_layout(self) -> Zone:
-        dimensions = self.window.get_datetime_box()
-        x = self.start_x
-        main = self._main_zone_layout()
-        second = self._secondary_zone_layout()
-        y = self.start_y + main.dimension.height + second.dimension.height
-        return Zone(x, y, dimensions)
+    def _time_zone_layout(self):
+        dimensions = self.window.get_time_box()
+        x = int(self.window.width * 0.04)
+        y = int(self.window.height * 0.63)
+        return
 
-    def zone_main(self, data: Text) -> Image:
+    def _date_zone_layout(self):
+        dimensions = self.window.get_date_box()
+        x = int(self.window.width * 0.04)
+        y = int(self.window.height * 0.82)
+        return
+
+    def zone_main(self, data: Text):
         # Main info - this will be the largest display zone and
         # should contain the most important info
         zone = self._main_zone_layout()
         return self.__text_zone(data, zone)
 
-    def zone_secondary(self, data: Text) -> Image:
+    def zone_secondary(self, data: Text):
         # Secondary info - this will be a smaller descriptor of
         # the data that is in the main zone or additional info that
         # pairs with the main zone
         zone = self._secondary_zone_layout()
         return self.__text_zone(data, zone)
 
-    def zone_image(self, data: Image) -> Image:
+    def zone_image(self, data: Image):
         # Icon - an appropriate image that pairs with the data
         # being displayed that adds additional context
         zone = self._image_zone_layout()
         return self.__image_zone(data, zone)
+
+    def zone_time(self, data: Text):
+        zone = self._time_zone_layout()
+        return self.__text_zone(data, zone)
+
+    def zone_date(self, data: Text):
+        zone = self._date_zone_layout()
+        return self.__text_zone(data, zone)
 
     def zone_datetime(self, data: Tuple[Text, Text]) -> Image:
         # This will be a static zone for displaying the date
