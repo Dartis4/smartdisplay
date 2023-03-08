@@ -31,9 +31,9 @@ class Window:
     OTHER_TEXT_HEIGHT_RATIO = 0.16
 
     def __init__(self, width, _height):
-        self.width = width  # - (width * 0.04)
+        self.width = width - (width * 0.04)
         height = width * 0.488
-        self.height = height  # - (height * 0.02)
+        self.height = height - (height * 0.02)
 
     def get_margin(self):
         return Rectangle(self.width * 0.04, self.height * 0.02)
@@ -63,7 +63,7 @@ class ZoneFormatter:
     def __init__(self, width, height, secondary_zone_on_top=True):
         self.second_zone_on_top = secondary_zone_on_top
         self.window = Window(width, height)
-        self.canvas = ImageDraw.Draw(Image.new("P", (int(self.window.width), int(self.window.height))))
+        self.canvas = ImageDraw.Draw(Image.new("P", (int(width), int(height))))
         margin = self.window.get_margin()
         self.start_x = margin.width
         self.start_y = margin.height
