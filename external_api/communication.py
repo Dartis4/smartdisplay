@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from sys import exit
 
-import ow_pull
+from _deprecated import ow_pull
 
 try:
     import json

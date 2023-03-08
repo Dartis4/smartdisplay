@@ -26,7 +26,7 @@ except TypeError:
 
 
 def generate_font(font_face, size):
-    return ImageFont.truetype(os.path.join(PATH, "res", "fonts", font_face), size)
+    return ImageFont.truetype(os.path.join(PATH, "../res", "fonts", font_face), size)
 
 
 def get_offset(source):
@@ -84,7 +84,7 @@ def main():
 
     # Draw the current weather icon over the backdrop
     if icon is not None:
-        fpath = os.path.join(PATH, "ow-resources", "{icon}@2x.png".format(icon=icon))
+        fpath = os.path.join(PATH, "../res/ow-resources", "{icon}@2x.png".format(icon=icon))
         ico = Image.open(fpath)
         x, y = get_offset(ico)
         img.paste(ico, (197 - x, 56 - y), create_mask(ico))

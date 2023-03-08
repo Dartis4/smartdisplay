@@ -128,9 +128,9 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-location.txt
-keys/key.txt
-ow.json
+res/location.txt
+res/keys/key.txt
+res/ow.json
 Daniel icon's/*
 .idea/
 !/.deepsource.toml

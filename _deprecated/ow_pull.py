@@ -4,8 +4,7 @@
 import os
 from sys import exit
 
-import key
-import location
+from _deprecated import location, key
 import weather_data_management as data
 
 try:

@@ -2,7 +2,7 @@ import os
 from os.path import exists
 
 PATH = os.path.dirname(__file__)
-DEFAULT_FILENAME = os.path.join(PATH, 'location.txt')
+DEFAULT_FILENAME = os.path.join(PATH, '../res/location.txt')
 
 
 def check():

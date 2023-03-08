@@ -8,8 +8,8 @@ __author__ = "Your Name"
 __version__ = "0.1.0"
 __license__ = "MIT"
 
-from display_data import get_data
-from display_draw import update
+from data import get_data
+from draw import update
 
 
 def main():

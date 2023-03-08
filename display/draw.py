@@ -15,7 +15,7 @@ try:
 except ImportError:
     exit("This script requires the inky module\nInstall with: sudo pip install inky")
 
-import display_format
+import format
 
 try:
     inky_display = auto(ask_user=True, verbose=True)
@@ -29,27 +29,19 @@ def update(data_dict: dict):
     if inky_display.resolution not in ((212, 104), (250, 122), (400, 300)):
         raise RuntimeError(f"{inky_display.WIDTH}x{inky_display.HEIGHT} is not a supported resolution")
 
-    # noinspection DuplicatedCode
-    def create_mask(source, mask=(inky_display.WHITE, inky_display.BLACK, inky_display.RED)):
-        mask_image = Image.new("1", source.size)
-        w, h = source.size
-        for x in range(w):
-            for y in range(h):
-                p = source.getpixel((x, y))
-                if p in mask:
-                    mask_image.putpixel((x, y), 255)
-        return mask_image
-
-    formatter = display_format.ZoneFormatter(inky_display.WIDTH, inky_display.HEIGHT,
+    formatter = format.ZoneFormatter(inky_display.WIDTH, inky_display.HEIGHT,
                                              secondary_zone_on_top=data_dict["second_on_top"])
 
-    # layers = [formatter.zone_main(data_dict["main"]),
-    #           formatter.zone_secondary(data_dict["secondary"]),
-    #           formatter.zone_datetime(data_dict["datetime"]),
-    #           formatter.zone_image(data_dict["image"])]
-
     def draw_text(context, position, content, color, font):
-        context.text(position, content, color, font=font)
+        if color == 'red':
+            inky_color = inky_display.RED
+        elif color == 'yellow':
+            inky_color = inky_display.YELLOW
+        elif color == 'white':
+            inky_color = inky_display.WHITE
+        else:
+            inky_color = inky_display.BLACK
+        context.text(position, content, inky_color, font=font)
 
     img = Image.new("P", (inky_display.WIDTH, inky_display.HEIGHT))
     draw = ImageDraw.Draw(img)

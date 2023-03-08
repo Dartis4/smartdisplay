@@ -23,7 +23,7 @@ except TypeError:
 
 class Font:
     # class variables
-    PATH = os.path.join(os.path.dirname(__file__), "res/fonts")
+    PATH = os.path.join(os.path.dirname(__file__), "../res/fonts")
 
     def __init__(self, font_face_filename: str, font_face_name: str, font_face_default_size: int):
         # instance variables
@@ -48,13 +48,4 @@ class Text:
         # instance variables
         self.font = font
         self.content = content
-        c = 0
-        if color == 'black':
-            c = inky_display.BLACK
-        if color == 'red':
-            c = inky_display.RED
-        if color == 'white':
-            c = inky_display.WHITE
-        if color == 'yellow':
-            c = inky_display.YELLOW
-        self.color = c
+        self.color = color

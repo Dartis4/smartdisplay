@@ -11,11 +11,9 @@ __license__ = "MIT"
 import os
 import time
 
-from PIL import Image
-
-from display_text import Text, Font
-from external_api_communication import fetch_info
-from weather_data_management import save_weather, load_weather
+from text import Text, Font
+from external_api.communication import fetch_info
+from _deprecated.weather_data_management import save_weather, load_weather
 
 FONT = Font("Verdana.ttf", "Verdana", 18)
 PATH = os.path.dirname(__file__)
