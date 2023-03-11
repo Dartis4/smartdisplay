@@ -85,6 +85,7 @@ class ZoneFormatter:
             return start_size
 
         font_size = find_largest_possible_font_size(self.canvas, data, zone)
+        print(data.content, font_size)
         return (zone.x, zone.y), data.content, data.color, data.font.generate(font_size)
 
     @staticmethod
