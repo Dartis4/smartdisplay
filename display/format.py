@@ -104,7 +104,7 @@ class ZoneFormatter:
             return Zone(x, y, dimensions)
 
     def _secondary_zone_layout(self):
-        dimensions = self.window.get_secondary_box()
+        dimensions = self.window.get_date_box()
         print("Secondary dimensions:", dimensions)
         if self.second_zone_on_top:
             return Zone(self.start_x, self.start_y, dimensions)
