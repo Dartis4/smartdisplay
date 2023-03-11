@@ -40,11 +40,9 @@ def get_image(data):
 
 
 def get_datetime():
-    now = str(time.strftime("%I:%M%p"))
-    now = "01:42PM"
+    now = "{}".format(time.strftime("%I:%M%p"))
     print(now)
-    date = str(time.strftime("%A, %m/%d"))
-    date = "Saturday, 03/11"
+    date = "{}".format(time.strftime("%A, %m/%d"))
     print(date)
     return Text(now, FONT), Text(date, FONT)
 
