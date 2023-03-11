@@ -148,7 +148,7 @@ class ZoneFormatter:
         # Secondary info - this will be a smaller descriptor of
         # the data that is in the main zone or additional info that
         # pairs with the main zone
-        zone = self._date_zone_layout()
+        zone = self._time_zone_layout()
         return self.__text_zone(data, zone)
 
     def zone_image(self, data: Image):
