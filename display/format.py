@@ -100,7 +100,7 @@ class ZoneFormatter:
             return Zone(self.start_x, self.start_y, dimensions)
         else:
             x = self.start_x
-            y = self.start_y + self.window.get_secondary_box().height
+            y = self.window.get_secondary_box().height
             return Zone(x, y, dimensions)
 
     def _secondary_zone_layout(self):
