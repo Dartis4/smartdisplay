@@ -59,7 +59,7 @@ def get_data():
         "second_on_top": get_order(),
         "main": get_main(int(data["main"]["temp"])),
         "secondary": get_secondary(data["name"]),
-        "datetime": get_datetime(t, d),
+        "datetime": get_datetime("01:53PM", "Saturday, 03/11"),
         "image": get_image(data["weather"][0]["icon"])
     }
     return data_dict
