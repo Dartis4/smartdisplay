@@ -52,7 +52,7 @@ def update(data_dict: dict):
 
     draw_text_here(*formatter.zone_main(data_dict["main"]))
     draw_text_here(*formatter.zone_secondary(data_dict["secondary"]))
-    draw.text((10, 150), time.strftime("%I:%M%p"), inky_display.BLACK)
+    print(*formatter.zone_datetime(data_dict["datetime"]))
     # map(lambda x: draw_text_here(*x), *formatter.zone_datetime(data_dict["datetime"]))
 
     img.paste(*formatter.zone_image(data_dict["image"]))
