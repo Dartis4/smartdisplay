@@ -91,8 +91,7 @@ class ZoneFormatter:
     @staticmethod
     def __image_zone(data: str, zone: Zone):
         img = Image.open(data)
-        new_img = img.resize((int(zone.dimension.width), int(zone.dimension.height)), resample=Image.LANCZOS,
-                             reducing_gap=3.0)
+        new_img = img.resize((int(zone.dimension.width), int(zone.dimension.height)))
         return new_img, (zone.x, zone.y)
 
     def _main_zone_layout(self):
