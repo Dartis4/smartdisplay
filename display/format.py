@@ -117,7 +117,7 @@ class ZoneFormatter:
     def _image_zone_layout(self):
         dimensions = self.window.get_image_box()
         print("Image dimensions:", dimensions)
-        x = int((self.window.width * 0.79) - dimensions.width // 2)
+        x = int((self.window.width * 0.83) - dimensions.width // 2)
         y = int((self.window.height * 0.46) - dimensions.height // 2)
         return Zone(x, y, dimensions)
 
