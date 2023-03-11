@@ -50,6 +50,7 @@ def get_datetime():
 def get_data():
     save_weather(fetch_info(ID))
     data = load_weather()
+    print(data)
     print(int(data["main"]["temp"]))
 
     print(data["name"])
