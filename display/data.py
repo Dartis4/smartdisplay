@@ -39,12 +39,8 @@ def get_image(data):
         return os.path.join(PATH, "../res/ow-resources/{icon}@2x.png".format(icon=data))
 
 
-def get_datetime():
-    now = "{}".format(time.strftime("%I:%M%p"))
-    print(now)
-    date = "{}".format(time.strftime("%A, %m/%d"))
-    print(date)
-    return Text(now, FONT), Text(date, FONT)
+def get_datetime(time_t, date_t):
+    return Text(time_t, FONT), Text(date_t, FONT)
 
 
 def get_data():
@@ -56,11 +52,14 @@ def get_data():
     print(data["name"])
     print(data["weather"][0]["icon"])
 
+    t = time.strftime("%I:%M%p")
+    d = time.strftime("%A, %m/%d")
+
     data_dict = {
         "second_on_top": get_order(),
         "main": get_main(int(data["main"]["temp"])),
         "secondary": get_secondary(data["name"]),
-        "datetime": get_datetime(),
+        "datetime": get_datetime(t, d),
         "image": get_image(data["weather"][0]["icon"])
     }
     return data_dict
