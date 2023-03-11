@@ -10,12 +10,13 @@ import functools
 
 from PIL import Image, ImageDraw
 
+from display.format import ZoneFormatter
+
 try:
+    # noinspection PyUnresolvedReferences
     import inky.auto as auto
 except ImportError:
     exit("This script requires the inky module\nInstall with: sudo pip install inky")
-
-import format
 
 try:
     inky_display = auto(ask_user=True, verbose=True)
@@ -29,8 +30,8 @@ def update(data_dict: dict):
     if inky_display.resolution not in ((212, 104), (250, 122), (400, 300)):
         raise RuntimeError(f"{inky_display.WIDTH}x{inky_display.HEIGHT} is not a supported resolution")
 
-    formatter = format.ZoneFormatter(inky_display.WIDTH, inky_display.HEIGHT,
-                                             secondary_zone_on_top=data_dict["second_on_top"])
+    formatter = ZoneFormatter(inky_display.WIDTH, inky_display.HEIGHT,
+                              secondary_zone_on_top=data_dict["second_on_top"])
 
     def draw_text(context, position, content, color, font):
         if color == 'red':
