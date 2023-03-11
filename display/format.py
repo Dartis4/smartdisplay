@@ -170,4 +170,4 @@ class ZoneFormatter:
         # and time. The user will not be able to modify this
         # data directly.
         time, date = data
-        return self.__text_zone(time, self._time_zone_layout()), self.__text_zone(date, self._date_zone_layout())
+        return self.zone_time(time), self.zone_date(date)
