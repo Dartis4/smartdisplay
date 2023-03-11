@@ -36,7 +36,7 @@ def get_secondary(data):
 
 def get_image(data):
     if data is not None:
-        return os.path.join(PATH, "/res/ow-resources/{icon}@2x.png".format(icon=data))
+        return os.path.join(PATH, "../res/ow-resources/{icon}@2x.png".format(icon=data))
 
 
 def get_datetime():
