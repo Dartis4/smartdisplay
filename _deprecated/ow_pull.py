@@ -4,8 +4,8 @@
 import os
 from sys import exit
 
-from _deprecated import location, key
-import weather_data_management as data
+from _deprecated import key, location
+from display import data
 
 try:
     import json

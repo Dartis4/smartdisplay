@@ -1,7 +1,7 @@
 import json
 import os
 
-import ow_pull
+from _deprecated import ow_pull
 
 PATH = os.path.dirname(__file__)
 DATA_FILE = os.path.join(PATH, '../res/ow.json')
