@@ -11,7 +11,7 @@ from typing import Tuple
 
 from PIL import ImageDraw, Image
 
-from text import Text
+from display.text import Text
 
 
 @dataclass
