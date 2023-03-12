@@ -32,7 +32,7 @@ def update(data_dict: dict):
         raise RuntimeError(f"{inky_display.WIDTH}x{inky_display.HEIGHT} is not a supported resolution")
 
     formatter = ZoneFormatter(inky_display.WIDTH, inky_display.HEIGHT,
-                              secondary_zone_on_top=data_dict["second_on_top"])
+                              main_zone_on_top=data_dict["main_on_top"])
 
     def draw_text(context, position, content, color, font):
         if color == 'red':

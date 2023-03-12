@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Display Portal</title>
+   </head>
+<body>
+    {% if api_list %}
+    <ul>
+        {% for api in api_list %}
+        <li><a href="{% url 'displayconf:enter_api' api.id %}">{{ api.name }}</a></li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No API's to display.</p>
+    {% endif %}
+</body>
+</html>

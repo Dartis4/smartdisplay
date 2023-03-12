@@ -60,8 +60,8 @@ class Window:
 
 class ZoneFormatter:
 
-    def __init__(self, width, height, secondary_zone_on_top=True):
-        self.second_zone_on_top = secondary_zone_on_top
+    def __init__(self, width, height, main_zone_on_top=False):
+        self.main_zone_on_top = main_zone_on_top
         self.window = Window(width, height)
         self.canvas = ImageDraw.Draw(Image.new("P", (int(width), int(height))))
         margin = self.window.get_margin()
@@ -97,7 +97,7 @@ class ZoneFormatter:
     def _main_zone_layout(self):
         dimensions = self.window.get_main_box()
         print("Main dimensions:", dimensions)
-        if not self.second_zone_on_top:
+        if self.main_zone_on_top:
             return Zone(self.start_x, -self.start_y, dimensions)
         else:
             x = self.start_x
@@ -107,7 +107,7 @@ class ZoneFormatter:
     def _secondary_zone_layout(self):
         dimensions = self.window.get_secondary_box()
         print("Secondary dimensions:", dimensions)
-        if self.second_zone_on_top:
+        if not self.main_zone_on_top:
             return Zone(self.start_x, self.start_y, dimensions)
         else:
             x = self.start_x

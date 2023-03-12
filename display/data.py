@@ -21,7 +21,7 @@ ID = 123
 
 
 def get_order():
-    return True
+    return False
 
 
 def get_main(data):
@@ -56,7 +56,7 @@ def get_data():
     print(data["weather"][0]["icon"])
 
     data_dict = {
-        "second_on_top": get_order(),
+        "main_on_top": get_order(),
         "main": get_main(int(data["main"]["temp"])),
         "secondary": get_secondary(data["name"]),
         "time": get_time(),
