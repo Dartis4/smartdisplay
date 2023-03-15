@@ -1,21 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Smart Display Portal</title>
-   </head>
-<body>
+{% extends "base.html" %}
+{% block title %}
+    Smart Display Portal
+{% endblock title %}
+{% block content %}
     <h1>Welcome</h1>
     {% if api_list %}
-    <ul>
-        {% for api in api_list %}
-        <li><a href="{% url 'displayconf:enter_api' api.id %}">{{ api.name }}</a></li>
-        {% endfor %}
-    </ul>
+        <ul>
+            {% for api in  api_list %}
+                <li>
+                    <a href="{% url 'displayconf:index' %}">{{ api.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
     {% else %}
-    <p>No API's to display.</p>
+        <p>No API's to show yet.</p>
     {% endif %}
-</body>
-</html>
+{% endblock content %}

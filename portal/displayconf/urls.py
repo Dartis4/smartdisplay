@@ -1,10 +1,9 @@
 from django.urls import path
 
-from . import views
+from .views import IndexView, ApiCreateView
 
 app_name = 'displayconf'
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('create/', views.create_api, name='create_api'),
-    path('entry/<int:api_id>/', views.enter_api, name='enter_api')
+    path('', IndexView.as_view(), name='index'),
+    path('api/create/', ApiCreateView.as_view(), name='create-api'),
 ]

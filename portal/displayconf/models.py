@@ -11,10 +11,6 @@ class User(models.Model):
 
 class API(models.Model):
     name = models.CharField(max_length=30)
-
-
-class APIData(models.Model):
-    name = models.ForeignKey(API, on_delete=models.CASCADE)
     base_address = models.URLField()
     format = models.CharField(max_length=10)
     params = models.CharField(max_length=100)
@@ -23,4 +19,3 @@ class APIData(models.Model):
 
     def __str__(self):
         return self.name.to_python(str)
-
