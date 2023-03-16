@@ -9,12 +9,13 @@ __license__ = "MIT"
 
 
 import display.main as display
+from external_api import communication
 
 
 def main():
     """ Main entry point of the app """
     display.main()
-
+    # communication.main()
 
 
 if __name__ == "__main__":

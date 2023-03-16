@@ -3,16 +3,12 @@
 
 import os
 import time
-from sys import exit
 
 from PIL import Image, ImageDraw, ImageFont
 
-import weather_data_management as data
+from display import data
 
-try:
-    from inky.auto import auto
-except ImportError:
-    exit("This script requires the inky module\nInstall with: sudo pip install inky")
+from inky.auto import auto
 
 # Get the current path
 PATH = os.path.dirname(__file__)

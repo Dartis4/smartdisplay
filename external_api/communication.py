@@ -1,23 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from sys import exit
+
+import json
+
+import requests
+from bs4 import BeautifulSoup
 
 from _deprecated import ow_pull
+from portal.displayconf.models import API
 
-try:
-    import json
-except ImportError:
-    exit("This script requires the json module\nInstall with: sudo pip install json")
-
-try:
-    import requests
-except ImportError:
-    exit("This script requires the requests module\nInstall with: sudo pip install requests")
-
-try:
-    from bs4 import BeautifulSoup
-except ImportError:
-    exit("This script requires the bs4 module\nInstall with: sudo pip install beautifulsoup4==4.6.3")
 
 def fetch_base_address(api_id):
     # print(api_id)
@@ -68,8 +59,22 @@ def get(base_address, request_format, parameters, token):
         return "fail"
 
 
+def get_info(api_id):
+    return API.objects.get(pk=api_id)
+
+
+def data_out(api_id):
+    result = get_info(api_id)
+    print(result)
+
+
+def data_in():
+    pass
+
+
 def main():
-    print(fetch_info(123))
+    # print(fetch_info(123))
+    data_out(1)
 
 
 if __name__ == '__main__':
