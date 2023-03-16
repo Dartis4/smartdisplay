@@ -7,9 +7,7 @@ __author__ = "Your Name"
 __version__ = "0.1.0"
 __license__ = "MIT"
 
-
 import display.main as display
-from external_api import communication
 
 
 def main():
