@@ -16,7 +16,7 @@ PATH = path.dirname(__file__)
 
 def main():
     """ Main entry point of the app """
-    sys_path.append(path.join(PATH, "portal/portal/settings.py"))
+    sys_path.append(path.join(PATH, "portal/"))
     environ.setdefault('DJANGO_SETTINGS_MODULE', 'portal.settings')
     setup()
 
