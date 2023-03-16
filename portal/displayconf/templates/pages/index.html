@@ -1,18 +1,19 @@
 {% extends "base.html" %}
 {% block title %}
-    Smart Display Portal
+    Home - Smart Display Portal
 {% endblock title %}
 {% block content %}
     <h1>Welcome</h1>
-    {% if api_list %}
+    {% if latest_api_list %}
         <ul>
-            {% for api in  api_list %}
+            {% for api in latest_api_list %}
                 <li>
-                    <a href="{% url 'displayconf:index' %}">{{ api.name }}</a>
+                    <a href="{% url 'api.id' %}">{{ api.name }}</a>
                 </li>
             {% endfor %}
         </ul>
     {% else %}
         <p>No API's to show yet.</p>
+        <a href="{% url 'displayconf:create-api' %}">Add an one here.</a>
     {% endif %}
 {% endblock content %}

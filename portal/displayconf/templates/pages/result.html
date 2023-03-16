@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}
+    Smart Display Portal
+{% endblock title %}
+{% block content %}
+    <h1>{{ api.name }}</h1>
+    <ul>
+        <li>Base Address: {{ api.base_address }}</li>
+        <li>Format: {{ api.format }}</li>
+        <li>Query Parameters: {{ api.params }}</li>
+        <li>Switch display zones: {{ api.switch_display_zones }}</li>
+        <li>Created: {{ api.creation_date }}</li>
+    </ul>
+{% endblock content %}

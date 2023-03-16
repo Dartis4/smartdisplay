@@ -1,9 +1,11 @@
 {% extends "base.html" %}
-{% block title %}New API{% endblock title %}
+{% block title %}
+    New API - Smart Display Portal
+{% endblock title %}
 {% block content %}
-    <h1>Enter the API info</h1>
-    <div style="max-width: 470px;">
-        <form action="" method="post">
+    <h1>Enter the info for your new API</h1>
+    <div>
+        <form action="{% url 'displayconf:redirect' api.id %}" method="post">
             {% csrf_token %}
             {{ form }}
             <input type="submit" value="Submit"/>

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}
+    Smart Display Portal
+{% endblock title %}
+{% block content %}
+    <h1>{{ api.name }}</h1>
+    <p>
+        {% for field in api._meta.get_fields() %}
+            {{ field }}
+        </br>
+    {% endfor %}
+</p>
+{% endblock content %}
