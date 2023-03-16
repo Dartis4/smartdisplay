@@ -17,7 +17,7 @@ PATH = path.dirname(__file__)
 def main():
     """ Main entry point of the app """
     sys_path.append(path.join(PATH, "portal/portal/settings.py"))
-    environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_project.settings')
+    environ.setdefault('DJANGO_SETTINGS_MODULE', 'portal.settings')
     setup()
 
 
