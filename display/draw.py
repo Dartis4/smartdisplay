@@ -7,11 +7,10 @@ __version__ = "0.1.0"
 __license__ = "MIT"
 
 import functools
-import time
 
 from PIL import Image, ImageDraw
 
-from display.format import ZoneFormatter
+from .format import ZoneFormatter
 
 try:
     # noinspection PyUnresolvedReferences
@@ -48,16 +47,30 @@ def update(data_dict: dict):
     img = Image.new("P", (inky_display.WIDTH, inky_display.HEIGHT))
     draw = ImageDraw.Draw(img)
 
-    draw_text_here = functools.partial(draw_text, draw)
+    def conv_color(color):
+        if color == 'red':
+            return inky_display.RED
+        elif color == 'yellow':
+            return inky_display.YELLOW
+        elif color == 'white':
+            return inky_display.WHITE
+        else:
+            return inky_display.BLACK
 
-    draw_text_here(*formatter.zone_main(data_dict["main"]))
-    draw_text_here(*formatter.zone_secondary(data_dict["secondary"]))
-    draw_text_here(*formatter.zone_time(data_dict["time"]))
-    draw_text_here(*formatter.zone_date(data_dict["date"]))
-    img.paste(*formatter.zone_image(data_dict["image"]))
+    zones = formatter.zones(data_dict)
+    [draw.text(pos, cont, conv_color(color), font=font) for pos, cont, color, font in zones["text"]]
+    img.paste(*zones["image"])
 
     inky_display.h_flip = True
     inky_display.v_flip = True
 
     inky_display.set_image(img)
     inky_display.show()
+
+
+def main():
+    pass
+
+
+if __name__ == '__main__':
+    main()

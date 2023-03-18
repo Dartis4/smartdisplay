@@ -5,7 +5,7 @@
 {% block content %}
     <h1>Enter the info for your new API</h1>
     <div>
-        <form action="{% url 'displayconf:redirect' api.id %}" method="post">
+        <form action="" method="post">
             {% csrf_token %}
             {{ form }}
             <input type="submit" value="Submit"/>

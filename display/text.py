@@ -8,12 +8,8 @@ __license__ = "MIT"
 
 import os.path
 
+import inky.auto as auto
 from PIL import ImageFont
-
-try:
-    import inky.auto as auto
-except ImportError:
-    exit("This script requires the inky module\nInstall with: sudo pip install inky")
 
 try:
     inky_display = auto(ask_user=True, verbose=True)
@@ -49,3 +45,11 @@ class Text:
         self.font = font
         self.content = content
         self.color = color
+
+
+def main():
+    pass
+
+
+if __name__ == '__main__':
+    main()

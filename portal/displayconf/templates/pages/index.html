@@ -8,12 +8,13 @@
         <ul>
             {% for api in latest_api_list %}
                 <li>
-                    <a href="{% url 'api.id' %}">{{ api.name }}</a>
+                    <a href="{% url 'displayconf:results' api.id %}">{{ api.name }}</a>
                 </li>
             {% endfor %}
         </ul>
+        <a href="{% url 'displayconf:create-api' %}">Add another</a>
     {% else %}
         <p>No API's to show yet.</p>
-        <a href="{% url 'displayconf:create-api' %}">Add an one here.</a>
+        <a href="{% url 'displayconf:create-api' %}">Add one here</a>
     {% endif %}
 {% endblock content %}

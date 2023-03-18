@@ -11,7 +11,7 @@ from typing import Tuple
 
 from PIL import ImageDraw, Image
 
-from display.text import Text
+from .text import Text
 
 
 @dataclass
@@ -139,36 +139,56 @@ class ZoneFormatter:
             print("Height error date")
         return Zone(x, y, dimensions)
 
-    def zone_main(self, data: Text):
+    def _zone_main(self, data: Text):
         # Main info - this will be the largest display zone and
         # should contain the most important info
         zone = self._main_zone_layout()
         return self.__text_zone(data, zone)
 
-    def zone_secondary(self, data: Text):
+    def _zone_secondary(self, data: Text):
         # Secondary info - this will be a smaller descriptor of
         # the data that is in the main zone or additional info that
         # pairs with the main zone
         zone = self._secondary_zone_layout()
         return self.__text_zone(data, zone)
 
-    def zone_image(self, data: Image):
+    def _zone_image(self, data: Image):
         # Icon - an appropriate image that pairs with the data
         # being displayed that adds additional context
         zone = self._image_zone_layout()
         return self.__image_zone(data, zone)
 
-    def zone_time(self, data: Text):
+    def _zone_time(self, data: Text):
         zone = self._time_zone_layout()
         return self.__text_zone(data, zone)
 
-    def zone_date(self, data: Text):
+    def _zone_date(self, data: Text):
         zone = self._date_zone_layout()
         return self.__text_zone(data, zone)
 
-    def zone_datetime(self, data: Tuple[Text, Text]) -> Image:
+    def _zone_datetime(self, data: Tuple[Text, Text]) -> Image:
         # This will be a static zone for displaying the date
         # and time. The user will not be able to modify this
         # data directly.
         time, date = data
-        return self.zone_time(time), self.zone_date(date)
+        return self._zone_time(time), self._zone_date(date)
+
+    def zones(self, data_dict: dict):
+        return {
+            "text": [
+                self._zone_main(data_dict['main']),
+                self._zone_secondary(data_dict["secondary"]),
+                self._zone_time(data_dict["time"]),
+                self._zone_date(data_dict["date"]),
+            ],
+            "image":
+                self._zone_image(data_dict["image"])
+        }
+
+
+def main():
+    pass
+
+
+if __name__ == '__main__':
+    main()

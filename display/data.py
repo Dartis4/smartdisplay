@@ -4,7 +4,7 @@
 Module Docstring
 """
 
-__author__ = "Your Name"
+__author__ = "Dane Artis"
 __version__ = "0.1.0"
 __license__ = "MIT"
 
@@ -12,8 +12,8 @@ import os
 import time
 
 from _deprecated.weather_data_management import load_weather, save_weather
-from display.text import Font, Text
 from external_api.communication import fetch_info
+from .text import Font, Text
 
 FONT = Font("Verdana.ttf", "Verdana", 18)
 PATH = os.path.dirname(__file__)
@@ -64,3 +64,11 @@ def get_data():
         "image": get_image(data["weather"][0]["icon"])
     }
     return data_dict
+
+
+def main():
+    pass
+
+
+if __name__ == '__main__':
+    main()

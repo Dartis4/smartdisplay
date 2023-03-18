@@ -9,11 +9,35 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="description" content=""/>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'pages/style.css' %}"/>
+    <link href="https://cdn.jsdelivr.net/npm/modern-normalize@v1.1.0/modern-normalize.min.css" rel="stylesheet">
     <link rel="icon" href="{% static 'pages/images/favicon.png' %}"/>
   </head>
   <body>
+    <nav class="nav" id="nav">
+      <a href="{% url 'displayconf:index' %}">Home</a>
+      <a href="{% url 'admin:index' %}">Admin</a>
+      <a href="javascript:void(0);" id="menu-toggle" onclick="togglemenu()">
+        <div class="menu-toggle__bar1"></div>
+        <div class="menu-toggle__bar2"></div>
+        <div class="menu-toggle__bar3"></div>
+      </a>
+    </nav>
+    <script>
+    function togglemenu() {
+      var x = document.getElementById("nav");
+      if (x.className === "nav") {
+        x.className += " nav--open";
+      } else {
+        x.className = "nav";
+      }
+      var element = document.getElementById("menu-toggle");
+      element.classList.toggle("menu-toggle--open");
+    }
+    </script>
     {% block content %}
     {% endblock content %}
+  <footer>
+    <small>© <script>document.write(new Date().getFullYear())</script> Dane Artis. All Rights Reserved.</small>
+  </footer>
   </body>
 </html>

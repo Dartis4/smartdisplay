@@ -6,9 +6,6 @@ import json
 import requests
 from bs4 import BeautifulSoup
 
-from _deprecated import ow_pull
-from portal.displayconf.models import API
-
 
 def fetch_base_address(api_id):
     # print(api_id)
@@ -30,16 +27,17 @@ def fetch_params(api_id):
 
 def fetch_key(api_id):
     # print(api_id)
-    token = ow_pull.pull_api_key()
-    key = {'appid': [token, ""]}
-    return key
+    # token = pull_api_key()
+    # key = {'appid': [token, ""]}
+    # return key
+    pass
 
 
 def fetch_info(api_id):
     return get(fetch_base_address(api_id), fetch_format(api_id), fetch_params(api_id), fetch_key(api_id))
 
 
-def get(base_address, request_format, parameters, token):
+def get(base_address: str, request_format: str, parameters: dict, token: dict):
     parameters.update(token)
 
     def gen_query_params(k, d):
@@ -60,12 +58,12 @@ def get(base_address, request_format, parameters, token):
 
 
 def get_info(api_id):
-    return API.objects.get(pk=api_id)
+    pass
 
 
 def data_out(api_id):
-    result = get_info(api_id)
-    print(result)
+    response = requests.get(f"http://127.0.0.1:8000/api/get/{api_id}/")
+    print(response)
 
 
 def data_in():

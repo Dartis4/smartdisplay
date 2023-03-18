@@ -1,5 +1,3 @@
-import datetime
-
 from django.db import models
 from django.forms import ModelForm
 from django.urls import reverse
@@ -26,7 +24,7 @@ class API(models.Model):
     creation_date = models.DateTimeField(auto_now_add=True)
 
     def get_absolute_url(self):
-        return reverse('api-detail', kwargs={'pk': self.pk})
+        return reverse('displayconf:results', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.name

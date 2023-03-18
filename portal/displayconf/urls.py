@@ -7,6 +7,6 @@ app_name = 'displayconf'
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
     path('create/', ApiCreateView.as_view(), name='create-api'),
-    path('<int:pk>/submission-redirect/', views.info, name='redirect'),
-    path('<int:pk>/', ResultView.as_view(), name='results')
+    path('<int:pk>/result/', ResultView.as_view(), name='results'),
+    # path('<int:api_id>/get/', views.get_info, name='get-info')
 ]
