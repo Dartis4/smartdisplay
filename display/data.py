@@ -11,8 +11,8 @@ __license__ = "MIT"
 import os
 import time
 
-from _deprecated.weather_data_management import load_weather, save_weather
-from external_api.communication import fetch_external
+import requests
+
 from .text import Font, Text
 
 FONT = Font("Verdana.ttf", "Verdana", 18)
@@ -35,8 +35,8 @@ def get_secondary(data):
 
 
 def get_image(data):
-    if data is not None:
-        return os.path.join(PATH, "../res/ow-resources/{icon}@2x.png".format(icon=data))
+    response = requests.get(data, stream=True)
+    return response.raw
 
 
 def get_time():
@@ -47,28 +47,14 @@ def get_date():
     return Text(time.strftime("%A, %m/%d"), FONT)
 
 
-def get_data():
-    save_weather(fetch_external(ID))
-    data = load_weather()
-    print(data)
-    print(int(data["main"]["temp"]))
-    print(data["name"])
-    print(data["weather"][0]["icon"])
+def get_data(main, second, image, order):
 
     data_dict = {
-        "main_on_top": get_order(),
-        "main": get_main(int(data["main"]["temp"])),
-        "secondary": get_secondary(data["name"]),
+        "main_on_top": order,
+        "main": main,
+        "secondary": second,
         "time": get_time(),
         "date": get_date(),
-        "image": get_image(data["weather"][0]["icon"])
+        "image": get_image(image)
     }
     return data_dict
-
-
-def main():
-    pass
-
-
-if __name__ == '__main__':
-    main()

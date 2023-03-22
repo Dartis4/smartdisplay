@@ -13,5 +13,5 @@ class Command(BaseCommand):
     help = 'Removes an api from the database'
 
     def handle(self, *args, **options):
-        pass
+        self.stdout.write("This command is not implemented yet.")
 

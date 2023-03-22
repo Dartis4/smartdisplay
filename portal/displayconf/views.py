@@ -42,7 +42,7 @@ def get_info(request, name):
 @csrf_exempt
 def get_data(request, pk):
     try:
-        api = API.objects.get(pk=pk)
+        api = API.objects.build_target(pk=pk)
         print(api)
     except API.DoesNotExist:
         return HttpResponse(status=404)

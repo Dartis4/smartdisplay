@@ -27,4 +27,5 @@ class ApiForm(ModelForm):
 
 class ApiData(models.Model):
     api = models.ForeignKey(API, on_delete=models.CASCADE)
-    data = models.JSONField(max_length=500)
+    data = models.JSONField(max_length=500, default=dict)
+    tags = models.JSONField(max_length=200, default=dict)

@@ -14,4 +14,4 @@ class Command(BaseCommand):
     help = 'Updates an existing api stored in the database'
 
     def handle(self, *args, **options):
-        pass
+        self.stdout.write("This command is not implemented yet.")

@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 Module Docstring
 """
@@ -8,7 +9,7 @@ __license__ = "MIT"
 
 from django.core.management.base import BaseCommand
 
-from portal.displayconf.models import API
+from displayconf.models import API
 
 
 class Command(BaseCommand):
@@ -29,22 +30,21 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         api = API(name=options['name'], base_address=options['base-address'])
-        api.save()
         if options['format']:
             api.format = options['format']
-        if options['query-param']:
+        if options['query_param']:
             params = dict()
-            for param in options['query-param']:
+            for param in options['query_param']:
                 values = param.copy()
                 label = values.pop(0)
                 delim = values.pop()
                 arg = values.pop().split(",")
                 params.update({label: arg + [delim]})
             api.params = params
-        if options['api-token']:
-            val = options['api-token']
-            api.token = {val[0]: val[1]}
-        if options['zone-swap']:
-            api.switch_display_zones = options['zone-swap']
+        if options['api_token']:
+            val = options['api_token']
+            api.token = {val[0]: [val[1], ""]}
+        if options['zone_swap']:
+            api.switch_display_zones = options['zone_swap']
         api.save()
         self.stdout.write("saved.")

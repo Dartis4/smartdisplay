@@ -6,15 +6,10 @@ __author__ = "Dane Artis"
 __version__ = "0.1.0"
 __license__ = "MIT"
 
+import inky.auto as auto
 from PIL import Image, ImageDraw
 
 from .format import ZoneFormatter
-
-try:
-    # noinspection PyUnresolvedReferences
-    import inky.auto as auto
-except ImportError:
-    exit("This script requires the inky module\nInstall with: sudo pip install inky")
 
 try:
     inky_display = auto(ask_user=True, verbose=True)
