@@ -1,8 +1,58 @@
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView, RedirectView
+from rest_framework import viewsets
+from rest_framework.parsers import JSONParser
 
 from .models import API
+from .serializers import ApiSerializer
+
+
+def handler(request, api):
+    if request.method == 'GET':
+        serializer = ApiSerializer(api)
+        return JsonResponse(serializer.data, status=200)
+
+    elif request.method == 'PUT':
+        data = JSONParser().parse(request)
+        serializer = ApiSerializer(api, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+        return JsonResponse(serializer.errors, status=404)
+
+    elif request.method == 'DELETE':
+        api.delete()
+        return HttpResponse(status=204)
+
+
+@csrf_exempt
+def get_info(request, name):
+    try:
+        api = API.objects.filter(name=name)
+        print(api[0])
+    except API.DoesNotExist:
+        return HttpResponse(status=404)
+
+    return handler(request, api[0])
+
+
+@csrf_exempt
+def get_data(request, pk):
+    try:
+        api = API.objects.get(pk=pk)
+        print(api)
+    except API.DoesNotExist:
+        return HttpResponse(status=404)
+
+    return handler(request, api)
+
+
+class ApiViewSet(viewsets.ModelViewSet):
+    queryset = API.objects.all()
+    serializer_class = ApiSerializer
 
 
 class SubmitRedirectView(RedirectView):

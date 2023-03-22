@@ -12,7 +12,7 @@ import os
 import time
 
 from _deprecated.weather_data_management import load_weather, save_weather
-from external_api.communication import fetch_info
+from external_api.communication import fetch_external
 from .text import Font, Text
 
 FONT = Font("Verdana.ttf", "Verdana", 18)
@@ -48,7 +48,7 @@ def get_date():
 
 
 def get_data():
-    save_weather(fetch_info(ID))
+    save_weather(fetch_external(ID))
     data = load_weather()
     print(data)
     print(int(data["main"]["temp"]))

@@ -5,10 +5,9 @@ import os
 import time
 
 from PIL import Image, ImageDraw, ImageFont
+from inky.auto import auto
 
 from display import data
-
-from inky.auto import auto
 
 # Get the current path
 PATH = os.path.dirname(__file__)

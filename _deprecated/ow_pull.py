@@ -1,26 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import json
 import os
-from sys import exit
+
+import requests
+from bs4 import BeautifulSoup
 
 from _deprecated import key, location
 from display import data
-
-try:
-    import json
-except ImportError:
-    exit("This script requires the json module\nInstall with: sudo pip install json")
-
-try:
-    import requests
-except ImportError:
-    exit("This script requires the requests module\nInstall with: sudo pip install requests")
-
-try:
-    from bs4 import BeautifulSoup
-except ImportError:
-    exit("This script requires the bs4 module\nInstall with: sudo pip install beautifulsoup4==4.6.3")
 
 # Get the current path
 PATH = os.path.dirname(__file__)

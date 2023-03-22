@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 import json
@@ -7,49 +6,15 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def fetch_base_address(api_id):
-    # print(api_id)
-    address = "https://api.openweathermap.org/data/2.5/weather"
-    return address
-
-
-def fetch_format(api_id):
-    # print(api_id)
-    data_format = ""
-    return data_format
-
-
-def fetch_params(api_id):
-    # print(api_id)
-    params = {"q": ["Rexburg", "ID", "US", ","], "units": ["imperial", ""]}
-    return params
-
-
-def fetch_key(api_id):
-    # print(api_id)
-    # token = pull_api_key()
-    # key = {'appid': [token, ""]}
-    # return key
-    pass
-
-
-def fetch_info(api_id):
-    return get(fetch_base_address(api_id), fetch_format(api_id), fetch_params(api_id), fetch_key(api_id))
-
-
-def get(base_address: str, request_format: str, parameters: dict, token: dict):
-    parameters.update(token)
-
-    def gen_query_params(k, d):
-        delimiter = d[k].pop()
-        return "{key}={values}".format(key=k, values=delimiter.join(d[k]))
-
-    target = "{0}{1}?{parameters}".format(base_address, request_format, parameters='&'.join(
-        [gen_query_params(key, parameters) for key in parameters.keys()]))
-
-    print(target)
-
-    response = requests.get(target)
+def request(target, rtype='get'):
+    if rtype == 'get':
+        response = requests.get(target)
+    elif rtype == 'put':
+        response = requests.put(target)
+    elif rtype == 'delete':
+        response = requests.delete(target)
+    else:
+        return "fail"
 
     if response.status_code == 200:
         return json.loads(str(BeautifulSoup(response.content, "html.parser")))
@@ -57,23 +22,37 @@ def get(base_address: str, request_format: str, parameters: dict, token: dict):
         return "fail"
 
 
-def get_info(api_id):
-    pass
+def fetch_internal(api_id=None):
+    if api_id is None:
+        return request(f"http://127.0.0.1:8000/api/get/")
+    else:
+        return request(f"http://127.0.0.1:8000/api/get/{api_id}/")
+
+def fetch_api_address(api_id):
+    response = fetch_internal(api_id=api_id)
+    if response != "fail":
+        address = response["base_address"]
+        form = response["format"]
+        params = response["params"]
+        key = response["token"]
+        return address, form, params, key
 
 
-def data_out(api_id):
-    response = requests.get(f"http://127.0.0.1:8000/api/get/{api_id}/")
-    print(response)
+def fetch_external(api_id):
+    return get(*fetch_api_address(api_id=api_id))
 
 
-def data_in():
-    pass
+def get(base_address: str, request_format: str, parameters: dict, token: dict):
+    parameters.update(token)
 
+    def gen_query_params(k, d):
+        delimiter = d[k].pop()
+        if delimiter == 'Blank':
+            delimiter = ""
+        return "{key}={values}".format(key=k, values=delimiter.join(d[k]))
 
-def main():
-    # print(fetch_info(123))
-    data_out(1)
+    target = "{0}{1}?{parameters}".format(base_address, request_format, parameters='&'.join(
+        [gen_query_params(key, parameters) for key in parameters.keys()]))
 
-
-if __name__ == '__main__':
-    main()
+    print(target)
+    return request(target)

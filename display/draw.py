@@ -6,8 +6,6 @@ __author__ = "Dane Artis"
 __version__ = "0.1.0"
 __license__ = "MIT"
 
-import functools
-
 from PIL import Image, ImageDraw
 
 from .format import ZoneFormatter

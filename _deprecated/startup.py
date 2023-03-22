@@ -1,10 +1,7 @@
 import os
-from PIL import Image, ImageFont, ImageDraw
 
-try:
-    from inky.auto import auto
-except ImportError:
-    exit("This script requires the inky module\nInstall with: sudo pip install inky")
+from PIL import Image, ImageFont, ImageDraw
+from inky.auto import auto
 
 PATH = os.path.dirname(__file__)
 FONT_FACE = "Verdana.ttf"

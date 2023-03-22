@@ -2,24 +2,20 @@
 # -*- coding: utf-8 -*-
 from itertools import cycle
 
+from external_api.communication import fetch_internal
+
+
 def fetch_api_ids():
-    return [123]
+    return [api["id"] for api in fetch_internal()["results"]]
+
 
 class ApiQueue:
-    api_ids = fetch_api_ids()
-    queue = cycle(api_ids)
+    list = fetch_api_ids()
+    queue = cycle(list)
 
-    def get_next_id(self):
+    def get_id(self):
         return next(self.queue)
 
     def remove_id(self, id_to_remove):
-        # TODO switch this to remove from the database and request the new list
-        self.api_ids.remove(id_to_remove)
-        self.queue = cycle(self.api_ids)
-
-
-def main():
-    pass
-
-if __name__ == '__main__':
-    main()
+        self.list.remove(id_to_remove)
+        self.queue = cycle(self.list)
