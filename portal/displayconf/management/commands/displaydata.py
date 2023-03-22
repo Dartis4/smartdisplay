@@ -12,8 +12,7 @@ import json
 from displayconf.models import ApiData, API
 from django.core.management import BaseCommand
 
-from display import data, draw
-
+from display import draw, data
 
 class Command(BaseCommand):
     help = 'Fetch the internal data of a specified api'
@@ -52,4 +51,4 @@ class Command(BaseCommand):
 
         swap_zone = API.objects.get(pk=options['id']).switch_display_zones
 
-        draw.update(data.get_data(main, second, image, swap_zone))
+        update(data.get_data(main, second, image, swap_zone))
