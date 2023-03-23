@@ -23,14 +23,13 @@ def request(target):
 
 
 def build_target(base_address: str, request_format: str, parameters: dict, token: dict):
-    # print(token)
-    parameters.update(token)
-
     def gen_query_params(k, d):
         delimiter = d[k].pop()
         if delimiter == 'Blank':
             delimiter = ""
         return "{key}={values}".format(key=k, values=delimiter.join(d[k]))
+    parameters.update(token)
+
 
     target = "{0}{1}?{parameters}".format(base_address, request_format, parameters='&'.join(
         [gen_query_params(key, parameters) for key in parameters.keys()]))

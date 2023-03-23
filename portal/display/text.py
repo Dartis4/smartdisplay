@@ -11,10 +11,7 @@ import os.path
 import inky.auto as auto
 from PIL import ImageFont
 
-try:
-    inky_display = auto(ask_user=True, verbose=True)
-except TypeError:
-    raise TypeError("You need to update the Inky library to >= v1.1.0")
+inky_display = auto(ask_user=True, verbose=True)
 
 
 class Font:

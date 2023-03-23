@@ -25,7 +25,6 @@ class Command(BaseCommand):
         print(api_data.data)
         json_data = json.loads(api_data.data)
         tags = api_data.tags
-        # print("yep", data[tags['main'].pop(0)][tags['main'].pop(0)])
 
         def parse_tag(value, tags):
             val = tags.pop(0)
@@ -36,10 +35,6 @@ class Command(BaseCommand):
         main, tag = parse_tag(json_data, tags['main'].copy())
         while len(tag):
             main, tag = parse_tag(main, tag)
-            # tag = tags['main'].pop(0)
-            # if tag[0] == '#':
-            #     tag = int(tag.replace('#', ''))
-            # main = main[tag]
 
         second, tag = parse_tag(json_data, tags['second'].copy())
         while len(tag):

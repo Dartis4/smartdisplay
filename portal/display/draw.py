@@ -11,14 +11,11 @@ from PIL import Image, ImageDraw
 
 from .format import ZoneFormatter
 
-try:
-    inky_display = auto(ask_user=True, verbose=True)
-    inky_display.set_border(inky_display.WHITE)
-except TypeError:
-    raise TypeError("You need to update the Inky library to >= v1.1.0")
-
+inky_display = auto(ask_user=True, verbose=True)
+inky_display.set_border(inky_display.WHITE)
 
 def update(data_dict: dict):
+    print()
     # print(data_dict)
     if inky_display.resolution not in ((212, 104), (250, 122), (400, 300)):
         raise RuntimeError(f"{inky_display.WIDTH}x{inky_display.HEIGHT} is not a supported resolution")
