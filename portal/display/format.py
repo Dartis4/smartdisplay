@@ -10,6 +10,7 @@ from dataclasses import dataclass
 from typing import Tuple
 
 from PIL import ImageDraw, Image
+from io import BytesIO
 
 from .text import Text
 
@@ -89,8 +90,8 @@ class ZoneFormatter:
         return (zone.x, zone.y), data.content, data.color, data.font.generate(font_size)
 
     @staticmethod
-    def __image_zone(data: str, zone: Zone):
-        img = Image.open(data)
+    def __image_zone(data, zone: Zone):
+        img = Image.open(BytesIO(data.content))
         new_img = img.resize((int(zone.dimension.width), int(zone.dimension.height)))
         return new_img, (zone.x, zone.y)
 

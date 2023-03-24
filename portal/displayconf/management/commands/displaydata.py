@@ -36,14 +36,20 @@ class Command(BaseCommand):
             if val[0] == '#':
                 val = int(val.replace('#', ''))
             return value[val], temp_tags
-        def type_conv(value, type):
-            if type:
-                t = type
-                if t == 'string' or 'str':
-                    return str(value)
+
+        def type_conv(value, vtype):
+            print("input type", vtype)
+            if vtype:
+                t = vtype
                 if t == 'int':
+                    print("int convert")
+                    print(int(value))
                     return int(value)
-                if t == 'float':
+                elif t == 'string' or 'str':
+                    print("string convert")
+                    return str(value)
+                elif t == 'float':
+                    print("float convert")
                     return float(value)
                 return value
             return value

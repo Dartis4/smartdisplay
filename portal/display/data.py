@@ -35,8 +35,10 @@ def get_secondary(data):
 
 
 def get_image(data):
-    response = requests.get(data, stream=True)
-    return response.raw
+    print("image data", data)
+    response = requests.get(data)
+    print("image response", response)
+    return response
 
 
 def get_time():
