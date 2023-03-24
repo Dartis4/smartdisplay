@@ -30,8 +30,8 @@ def build_target(base_address: str, request_format: str, parameters: dict, token
         if delimiter == 'Blank':
             delimiter = ""
         return "{key}={values}".format(key=k, values=delimiter.join(d[k]))
-    parameters.update(token)
 
+    parameters.update(token)
 
     target = "{0}{1}?{parameters}".format(base_address, request_format, parameters='&'.join(
         [gen_query_params(key, parameters) for key in parameters.keys()]))
@@ -39,16 +39,16 @@ def build_target(base_address: str, request_format: str, parameters: dict, token
 
 
 class Command(BaseCommand):
-    help = 'Fetch the external data of a specified api'
+    help = 'Fetch the external data of a specified api\n\nIf a digit is necessary to index a JSON list, wrap the digit in quotes and precede it with a # character (i.e. "#0" for the first index).'
 
     def add_arguments(self, parser):
         parser.add_argument('id', type=int, nargs='?', help='the id of the api to fetch data for')
         parser.add_argument('--main', type=str, nargs='+',
                             help='the json tag for the data to be displayed in the main zone')
         parser.add_argument('--secondary', type=str, nargs='+',
-                            help='the json tag for the data to be displayed in the main zone')
+                            help='the json tag for the data to be displayed in the second zone')
         parser.add_argument('--image', type=str, nargs='+',
-                            help='the json tag for the data to be displayed in the main zone')
+                            help='the json tag for the data to be displayed in the image zone')
 
     def handle(self, *args, **options):
         api = API.objects.get(pk=options['id'])
