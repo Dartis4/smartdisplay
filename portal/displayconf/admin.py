@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from . import models
+from .models import API, ApiData
 
-admin.site.register(models.API)
-admin.register(models.ApiData)
+admin.site.register(API)
+admin.site.register(ApiData)

@@ -47,4 +47,4 @@ class Command(BaseCommand):
         if options['zone_swap']:
             api.switch_display_zones = options['zone_swap']
         api.save()
-        self.stdout.write("saved.")
+        self.stdout.write("{name}(id:{aid}) saved.".format(name=api.name, aid=api.id))

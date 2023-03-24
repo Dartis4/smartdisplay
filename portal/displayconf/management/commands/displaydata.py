@@ -46,4 +46,4 @@ class Command(BaseCommand):
 
         swap_zone = API.objects.get(pk=options['id']).switch_display_zones
 
-        update(data.get_data(main, second, image, swap_zone))
+        draw.update(data.get_data(main, second, image, swap_zone))
