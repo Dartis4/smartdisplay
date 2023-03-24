@@ -11,11 +11,8 @@ from PIL import Image, ImageDraw
 
 from .format import ZoneFormatter
 
-try:
-    inky_display = auto(ask_user=True, verbose=True)
-    inky_display.set_border(inky_display.WHITE)
-except TypeError:
-    raise TypeError("You need to update the Inky library to >= v1.1.0")
+inky_display = auto(ask_user=True, verbose=True)
+inky_display.set_border(inky_display.WHITE)
 
 
 def update(data_dict: dict):

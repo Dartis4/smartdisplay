@@ -8,15 +8,16 @@ __license__ = "MIT"
 
 import os.path
 
-import inky.auto as auto
+# import inky.auto as auto
+from inky.mock import InkyMockWHAT
 from PIL import ImageFont
 
-inky_display = auto(ask_user=True, verbose=True)
-
+# inky_display = auto(ask_user=True, verbose=True)
+inky_display = InkyMockWHAT("black")
 
 class Font:
     # class variables
-    PATH = os.path.join(os.path.dirname(__file__), "../res/fonts")
+    PATH = os.path.join(os.path.dirname(__file__), "../../res/fonts")
 
     def __init__(self, font_face_filename: str, font_face_name: str, font_face_default_size: int):
         # instance variables

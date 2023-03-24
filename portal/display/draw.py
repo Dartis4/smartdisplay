@@ -6,13 +6,16 @@ __author__ = "Dane Artis"
 __version__ = "0.1.0"
 __license__ = "MIT"
 
-import inky.auto as auto
+# import inky.auto as auto
+from inky.mock import InkyMockWHAT
 from PIL import Image, ImageDraw
 
 from .format import ZoneFormatter
 
-inky_display = auto(ask_user=True, verbose=True)
+# inky_display = auto(ask_user=True, verbose=True)
+inky_display = InkyMockWHAT("black")
 inky_display.set_border(inky_display.WHITE)
+
 
 def update(data_dict: dict):
     print()

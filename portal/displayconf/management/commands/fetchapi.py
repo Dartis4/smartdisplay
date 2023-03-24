@@ -16,6 +16,8 @@ from django.core.management import BaseCommand
 def request(target):
     response = requests.get(target)
 
+    # print(response.content)
+
     if response.status_code == 200:
         return str(BeautifulSoup(response.content, "html.parser"))
     else:
@@ -66,3 +68,6 @@ class Command(BaseCommand):
                 api_data.tags = {'main': options['main'], 'second': options['secondary'], 'image': options['image']}
                 print(api_data.tags)
                 api_data.save()
+                self.stdout.write("{name}(id:{aid}) data saved.".format(name=api.name, aid=api.id))
+        else:
+            self.stdout.write("Could not fetch from {target}.".format(target=target))

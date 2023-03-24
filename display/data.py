@@ -51,8 +51,8 @@ def get_data(main, second, image, order):
 
     data_dict = {
         "main_on_top": order,
-        "main": main,
-        "secondary": second,
+        "main": get_main(main),
+        "secondary": get_second(second),
         "time": get_time(),
         "date": get_date(),
         "image": get_image(image)
