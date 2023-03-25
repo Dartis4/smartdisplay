@@ -7,14 +7,11 @@ PATH = os.path.dirname(__file__)
 FONT_FACE = "Verdana.ttf"
 
 # Set up the display
-try:
-    inky_display = auto(ask_user=True, verbose=True)
-except TypeError:
-    raise TypeError("You need to update the Inky library to >= v1.1.0")
+inky_display = auto(ask_user=True, verbose=True)
 
 
 def generate_font(font_face, size):
-    return ImageFont.truetype(os.path.join(PATH, font_face), size)
+    return ImageFont.truetype(os.path.join(PATH, "../res/fonts/", font_face), size)
 
 
 def main():
