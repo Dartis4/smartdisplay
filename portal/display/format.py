@@ -86,7 +86,7 @@ class ZoneFormatter:
             return start_size
 
         font_size = find_largest_possible_font_size(self.canvas, data, zone)
-        print(data.content, font_size)
+        # print(data.content, font_size)
         return (zone.x, zone.y), data.content, data.color, data.font.generate(font_size)
 
     @staticmethod
@@ -117,7 +117,7 @@ class ZoneFormatter:
 
     def _image_zone_layout(self):
         dimensions = self.window.get_image_box()
-        print("Image dimensions:", dimensions)
+        # print("Image dimensions:", dimensions)
         x = int((self.window.width * 0.83) - dimensions.width // 2)
         y = int((self.window.height * 0.46) - dimensions.height // 2)
         return Zone(x, y, dimensions)
@@ -127,8 +127,8 @@ class ZoneFormatter:
         # print("Time dimensions:", dimensions)
         x = int(self.window.width * 0.04)
         y = int(self.window.height * 0.63)
-        if y + dimensions.height > self.window.height - self.start_y:
-            print("Height overflow -> time")
+        # if y + dimensions.height > self.window.height - self.start_y:
+        #     print("Height overflow -> time")
         return Zone(x, y, dimensions)
 
     def _date_zone_layout(self):
@@ -136,8 +136,8 @@ class ZoneFormatter:
         # print("Date dimensions:", dimensions)
         x = int(self.window.width * 0.04)
         y = int(self.window.height * 0.82)
-        if y + dimensions.height > self.window.height:
-            print("Height overflow -> date")
+        # if y + dimensions.height > self.window.height:
+        #     print("Height overflow -> date")
         return Zone(x, y, dimensions)
 
     def _zone_main(self, data: Text):
