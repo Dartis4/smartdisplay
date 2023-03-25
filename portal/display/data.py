@@ -42,6 +42,7 @@ def get_image(data):
 
 
 def get_time():
+    print(time.strftime("%I:%M%p"))
     return Text(time.strftime("%I:%M%p"), FONT)
 
 
