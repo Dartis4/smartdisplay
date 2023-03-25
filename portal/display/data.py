@@ -35,9 +35,9 @@ def get_secondary(data):
 
 
 def get_image(data):
-    print("image data", data)
+    # print("image data", data)
     response = requests.get(data)
-    print("image response", response)
+    # print("image response", response)
     return response
 
 
