@@ -10,6 +10,7 @@ __license__ = "MIT"
 
 import os
 import time
+import datetime
 
 import requests
 
@@ -42,8 +43,8 @@ def get_image(data):
 
 
 def get_time():
-    print(time.strftime("%I:%M%p"))
-    return Text(time.strftime("%I:%M%p"), FONT)
+    print(datetime.datetime.time(datetime.datetime.now()).strftime("%I:%M%p"))
+    return Text(datetime.datetime.time(datetime.datetime.now()).strftime("%I:%M%p"), FONT)
 
 
 def get_date():
