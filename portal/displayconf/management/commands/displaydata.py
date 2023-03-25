@@ -38,18 +38,18 @@ class Command(BaseCommand):
             return value[val], temp_tags
 
         def type_conv(value, vtype):
-            print("input type", vtype)
+            # print("input type", vtype)
             if vtype:
                 t = vtype
                 if t == 'int':
-                    print("int convert")
-                    print(int(value))
+                    # print("int convert")
+                    # print(int(value))
                     return int(value)
                 elif t == 'string' or 'str':
-                    print("string convert")
+                    # print("string convert")
                     return str(value)
                 elif t == 'float':
-                    print("float convert")
+                    # print("float convert")
                     return float(value)
                 return value
             return value

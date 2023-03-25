@@ -97,7 +97,7 @@ class ZoneFormatter:
 
     def _main_zone_layout(self):
         dimensions = self.window.get_main_box()
-        print("Main dimensions:", dimensions)
+        # print("Main dimensions:", dimensions)
         if self.main_zone_on_top:
             return Zone(self.start_x, -self.start_y, dimensions)
         else:
@@ -107,7 +107,7 @@ class ZoneFormatter:
 
     def _secondary_zone_layout(self):
         dimensions = self.window.get_secondary_box()
-        print("Secondary dimensions:", dimensions)
+        # print("Secondary dimensions:", dimensions)
         if not self.main_zone_on_top:
             return Zone(self.start_x, self.start_y, dimensions)
         else:
@@ -124,20 +124,20 @@ class ZoneFormatter:
 
     def _time_zone_layout(self):
         dimensions = self.window.get_time_box()
-        print("Time dimensions:", dimensions)
+        # print("Time dimensions:", dimensions)
         x = int(self.window.width * 0.04)
         y = int(self.window.height * 0.63)
         if y + dimensions.height > self.window.height - self.start_y:
-            print("Height error time")
+            print("Height overflow -> time")
         return Zone(x, y, dimensions)
 
     def _date_zone_layout(self):
         dimensions = self.window.get_date_box()
-        print("Date dimensions:", dimensions)
+        # print("Date dimensions:", dimensions)
         x = int(self.window.width * 0.04)
         y = int(self.window.height * 0.82)
         if y + dimensions.height > self.window.height:
-            print("Height error date")
+            print("Height overflow -> date")
         return Zone(x, y, dimensions)
 
     def _zone_main(self, data: Text):

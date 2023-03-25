@@ -8,12 +8,12 @@ __license__ = "MIT"
 
 import os.path
 
-import inky.auto as auto
-# from inky.mock import InkyMockWHAT
+# import inky.auto as auto
+from inky.mock import InkyMockWHAT
 from PIL import ImageFont
 
-inky_display = auto(ask_user=True, verbose=True)
-# inky_display = InkyMockWHAT("black")
+# inky_display = auto(ask_user=True, verbose=True)
+inky_display = InkyMockWHAT("black")
 
 class Font:
     # class variables

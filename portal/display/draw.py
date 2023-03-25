@@ -6,14 +6,14 @@ __author__ = "Dane Artis"
 __version__ = "0.1.0"
 __license__ = "MIT"
 
-import inky.auto as auto
-# from inky.mock import InkyMockWHAT
+# import inky.auto as auto
+from inky.mock import InkyMockWHAT
 from PIL import Image, ImageDraw
 
 from .format import ZoneFormatter
 
-inky_display = auto(ask_user=True, verbose=True)
-# inky_display = InkyMockWHAT("black")
+# inky_display = auto(ask_user=True, verbose=True)
+inky_display = InkyMockWHAT("black")
 inky_display.set_border(inky_display.WHITE)
 
 
@@ -25,17 +25,6 @@ def update(data_dict: dict):
 
     formatter = ZoneFormatter(inky_display.WIDTH, inky_display.HEIGHT,
                               main_zone_on_top=data_dict["main_on_top"])
-
-    def draw_text(context, position, content, color, font):
-        if color == 'red':
-            inky_color = inky_display.RED
-        elif color == 'yellow':
-            inky_color = inky_display.YELLOW
-        elif color == 'white':
-            inky_color = inky_display.WHITE
-        else:
-            inky_color = inky_display.BLACK
-        context.text(position, content, inky_color, font=font)
 
     img = Image.new("P", (inky_display.WIDTH, inky_display.HEIGHT))
     draw = ImageDraw.Draw(img)
