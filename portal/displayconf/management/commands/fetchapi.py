@@ -66,7 +66,7 @@ class Command(BaseCommand):
                 api_data = ApiData.objects.get(api_id=options['id'])
                 api_data.data = res
                 api_data.tags = {'main': options['main'], 'second': options['secondary'], 'image': options['image']}
-                print(api_data.tags)
+                # print(api_data.tags)
                 api_data.save()
                 self.stdout.write("{name}(id:{aid}) data saved.".format(name=api.name, aid=api.id))
         else:
